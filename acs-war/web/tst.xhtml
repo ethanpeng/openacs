@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:acs="http://theopenacs.org/components">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition>
+        <h:form>
+            <acs:form binding="#{Service.form}" visible="false" source="#{Service.properties}">
+                <rich:tabPanel switchType="client" width="1000px">
+                    <rich:tab label="General">
+                        <acs:form visible="true" >
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.DTMFMethod" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.DTMFMethodG711" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.DigitMap" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.DigitMapEnable" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.Enable" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.FaxPassThrough" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MaxSessions" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.ModemPassThrough" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.Name" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.NonVoiceBandwidthReservedDownstream" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.NonVoiceBandwidthReservedUpstream" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.PSTNFailOver" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.Region" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.STUNEnable" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.STUNServer" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.ServiceProviderInfo.ContactPhoneNumber" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.ServiceProviderInfo.EmailAddress" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.ServiceProviderInfo.Name" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.ServiceProviderInfo.URL" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SignalingProtocol" />
+                        </acs:form>
+                    </rich:tab>
+                    <rich:tab label="Fax T.38">
+                        <acs:form visible="true" >
+
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.FaxT38.BitRate" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.FaxT38.Enable" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.FaxT38.HighSpeedPacketRate" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.FaxT38.HighSpeedRedundancy" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.FaxT38.LowSpeedRedundancy" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.FaxT38.TCFMethod" />
+                        </acs:form>
+                    </rich:tab>
+                    <rich:tab label="H.323">
+                        <acs:form visible="true" >
+
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.H323.AuthPassword" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.H323.DSCPMark" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.H323.EthernetPriorityMark" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.H323.Gatekeeper" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.H323.GatekeeperID" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.H323.GatekeeperPort" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.H323.H235Authentication" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.H323.SendersID" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.H323.TimeToLive" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.H323.VLANIDMark" />
+                        </acs:form>
+                    </rich:tab>
+                    <rich:tab label="MGCP">
+                        <acs:form visible="true" >
+
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.AllowPiggybackEvents" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.CallAgent1" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.CallAgent2" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.CallAgentPort1" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.CallAgentPort2" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.DSCPMark" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.Domain" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.EthernetPriorityMark" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.LocalPort" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.MaxRetranCount" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.RegisterMode" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.RetranIntervalTimer" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.SendRSIPImmediately" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.User" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.MGCP.VLANIDMark" />
+                        </acs:form>
+                    </rich:tab>
+                    <rich:tab label="RTP">
+                        <acs:form visible="true" >
+
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.DSCPMark" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.EthernetPriorityMark" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.LocalPortMax" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.LocalPortMin" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.RTCP.Enable" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.RTCP.LocalCName" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.RTCP.TxRepeatInterval" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.Redundancy.DTMFRedundancy" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.Redundancy.Enable" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.Redundancy.FaxAndModemRedundancy" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.Redundancy.MaxSessionsUsingRedundancy" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.Redundancy.ModemRedundancy" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.Redundancy.PayloadType" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.Redundancy.VoiceRedundancy" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.SRTP.Enable" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.SRTP.EncryptionKeySizes" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.SRTP.KeyingMethods" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.TelephoneEventPayloadType" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.RTP.VLANIDMark" />
+                        </acs:form>
+                    </rich:tab>
+                    <rich:tab label="SIP">
+                        <acs:form visible="true" >
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.DSCPMark" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.EthernetPriorityMark" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.InboundAuth" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.InboundAuthPassword" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.InboundAuthUsername" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.InviteExpires" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.Organization" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.OutboundProxy" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.OutboundProxyPort" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.ProxyServer" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.ProxyServerPort" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.ProxyServerTransport" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.ReInviteExpires" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.RegisterExpires" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.RegisterRetryInterval" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.RegistersMinExpires" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.RegistrarServer" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.RegistrarServerPort" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.RegistrarServerTransport" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.RegistrationPeriod" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerA" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerB" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerC" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerD" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerE" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerF" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerG" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerH" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerI" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerJ" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerK" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerT1" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerT2" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.TimerT4" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.UseCodecPriorityInSDPResponse" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.UserAgentDomain" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.UserAgentPort" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.UserAgentTransport" />
+                            <acs:param varname=".Services.VoiceService.1.VoiceProfile.{i}.SIP.VLANIDMark" />
+                        </acs:form>
+                    </rich:tab>
+                </rich:tabPanel>
+            </acs:form>
+            <h:commandButton class="rich-button" type="submit" value="Create" action="#{testbean.act}"/>
+        </h:form>
+    </ui:composition>
+</html>

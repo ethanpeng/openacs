@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Device management</ui:define>
+        <ui:define name="body">
+            <h4><h:outputText value="Methods info for #{HwModel.displayName} #{Software.version}" /></h4>
+            <h:panelGrid columns="3">
+                <h:panelGroup>
+                    <h5><h:outputText value="Standard methods" /></h5>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="AddObject: " />
+                        <h:outputText value="#{Software.methods['AddObject']}" />
+                        <h:outputText value="DeleteObject: " />
+                        <h:outputText value="#{Software.methods['DeleteObject']}" />
+                        <h:outputText value="Download: " />
+                        <h:outputText value="#{Software.methods['Download']}" />
+                        <h:outputText value="FactoryReset: " />
+                        <h:outputText value="#{Software.methods['FactoryReset']}" />
+                        <h:outputText value="GetAllQueuedTransfers: " />
+                        <h:outputText value="#{Software.methods['GetAllQueuedTransfers']}" />
+                        <h:outputText value="GetOptions: " />
+                        <h:outputText value="#{Software.methods['GetOptions']}" />
+                        <h:outputText value="GetParameterAttributes: " />
+                        <h:outputText value="#{Software.methods['GetParameterAttributes']}" />
+                        <h:outputText value="GetParameterNames: " />
+                        <h:outputText value="#{Software.methods['GetParameterNames']}" />
+                        <h:outputText value="GetParameterValues: " />
+                        <h:outputText value="#{Software.methods['GetParameterValues']}" />
+                        <h:outputText value="GetQueuedTransfers : " />
+                        <h:outputText value="#{Software.methods['GetQueuedTransfers']}" />
+                        <h:outputText value="Reboot: " />
+                        <h:outputText value="#{Software.methods['Reboot']}" />
+                        <h:outputText value="SetParameterAttributes: " />
+                        <h:outputText value="#{Software.methods['SetParameterAttributes']}" />
+                        <h:outputText value="SetParameterValues: " />
+                        <h:outputText value="#{Software.methods['SetParameterValues']}" />
+
+                        <h:outputText value="SetVouchers: " />
+                        <h:outputText value="#{Software.methods['SetVouchers']}" />
+                        <h:outputText value="ScheduleInform: " />
+                        <h:outputText value="#{Software.methods['ScheduleInform']}" />
+                        <h:outputText value="Upload: " />
+                        <h:outputText value="#{Software.methods['Upload']}" />
+
+                    </h:panelGrid>
+                </h:panelGroup>
+                <rich:spacer width="50" height="1" />
+                <h:panelGroup >
+                    <h5><h:outputText value="Vendor methods" /></h5>
+                    <h:dataTable value="#{Software.vendorMethods}" var="m" columnClasses="">
+                        <h:column>
+                            <h:outputText value="#{m}" />
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+            </h:panelGrid>
+        </ui:define>
+        <ui:define name="lmenu"><ui:include src="device_menu.xhtml" /> </ui:define>
+    </ui:composition>
+</html>

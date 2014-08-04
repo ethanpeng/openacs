@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Device management</ui:define>
+        <ui:define name="lmenu">
+            <a4j:form>
+                <rich:panelBar width="100%">
+                    <rich:panelBarItem  label="#{HwModel.displayName}"/>
+                </rich:panelBar>
+                <rich:panelBar width="100%">
+                    <rich:panelBarItem   id="swList" label="Firmware">
+                        <table border="0" cellpadding="0" cellspacing="1">
+                            <tbody>
+                                <tr class="unactive" onmouseover="this.className='active';" onmouseout="this.className='unactive'">
+                                    <td class="ico"><h:graphicImage value="/images/icon_script.gif" width="16" height="16" alt="" border="0" /></td>
+                                    <td class="text" width="100%">
+                                        <h:commandLink style="display:block;height:20px" value="Create ..." action="#{Software.clear}">
+                                            <a4j:actionparam name="hwid" value="#{HwModel.id}" assignTo="#{Software.hwid}"/>
+                                        </h:commandLink>
+
+                                    </td>
+                                </tr>
+                                <a4j:repeat var="software" value="#{Software.all}">
+                                    <tr class="unactive" onmouseover="this.className='active';" onmouseout="this.className='unactive'">
+                                        <td class="ico"><h:graphicImage value="/images/icon_script.gif" width="16" height="16" alt="" border="0" /></td>
+                                        <td class="text" width="100%">
+                                            <h:commandLink style="display:block;height:20px" value="#{software.version}"  action="#{Software.load}">
+                                                <a4j:actionparam name="hwid" value="#{software.hwid}" assignTo="#{Software.hwid}"/>
+                                                <a4j:actionparam name="version" value="#{Software.hwid}" assignTo="#{Software.version}"/>
+                                            </h:commandLink>
+                                        </td>
+                                    </tr>
+                                </a4j:repeat>
+                            </tbody>
+                        </table>
+                    </rich:panelBarItem>
+                </rich:panelBar>
+                <rich:panelBar width="100%">
+                    <rich:panelBarItem   id="cfgList" label="Configurations">
+                        <table border="0" cellpadding="0" cellspacing="1">
+                            <tbody>
+                                <tr class="unactive" onmouseover="this.className='active';" onmouseout="this.className='unactive'">
+                                    <td class="ico"><h:graphicImage value="/images/icon_script.gif" width="16" height="16" alt="" border="0" /></td>
+                                    <td class="text" width="100%">
+                                        <h:outputLink style="display:block;height:20px" value="config.jsf">
+                                            <f:param name="hwid" value="#{Config.hwid}"/>
+                                            <h:outputText value="Create ..." />
+                                        </h:outputLink>
+                                    </td>
+                                </tr>
+                                <a4j:repeat var="config" value="#{Config.all}">
+                                    <tr class="unactive" onmouseover="this.className='active';" onmouseout="this.className='unactive'">
+                                        <td class="ico"><h:graphicImage value="/images/icon_script.gif" width="16" height="16" alt="" border="0" /></td>
+                                        <td class="text" width="100%">
+                                            <h:outputLink style="display:block;height:20px" value="config.jsf">
+                                                <f:param name="hwid" value="#{Config.hwid}"/>
+                                                <f:param name="cfgname" value="#{config.name}"/>
+                                                <h:outputText value="#{config.name}" />
+                                            </h:outputLink>
+                                        </td>
+                                    </tr>
+                                </a4j:repeat>
+                            </tbody>
+                        </table>
+                    </rich:panelBarItem>
+                </rich:panelBar>
+            </a4j:form>
+        </ui:define>
+    </ui:composition>
+</html>

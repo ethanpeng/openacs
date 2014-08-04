@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Cpe info for #{Cpe.sn}</ui:define>
+        <ui:define name="body">
+            <a4j:form>
+                <h:panelGrid columns="7">
+                    <h:outputText value="Hardware:" />
+                    <h:selectOneMenu submitMethod="ajax" value="#{Cpe.hwid}">
+                        <f:selectItems   value="#{Cpe.hardwareList}" />
+                        <a4j:support event="onchange" />
+                    </h:selectOneMenu>
+                    <h:outputText value="Serial No:" />
+                    <h:inputText value="#{Cpe.snIn}" id="cpeSerialNo"/>
+                    <h:commandButton class="rich-button" value="Details" action="#{Cpe.findItem}" reRender="cpelist,cpedetails"/>
+                    <h:commandButton class="rich-button" type="submit" value="New" action="#{Cpe.newItem}" reRender="cpedetails,cpelist"  />
+                </h:panelGrid>
+                <h:outputText value="Customer ID:" />
+                <h:inputText value="#{Cpe.customerid_in}"/>
+
+                <rich:suggestionbox for="cpeSerialNo"
+                                    rules="taisykle" first="0" minChars="1" border="1" width="100" height="100"
+                                    shadowDepth="#5" suggestionAction="#{Cpe.autocompleteSerialNo}" var="result">
+                    <h:column>
+                        <h:outputText value="#{result}" />
+                    </h:column>
+                </rich:suggestionbox>
+            </a4j:form >
+            <rich:spacer width="1" height="5"/>
+
+            <a4j:form  id="cpelist">
+                <rich:dataTable rendered="#{Cpe.findResultLength>1}"
+                                onRowMouseOver="this.style.backgroundColor='#F1F1F1'"
+                                onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                                cellpadding="0" cellspacing="0"
+                                width="700" border="0" var="c" value="#{Cpe.findResult}">
+
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="Serial number"/>
+                        </f:facet>
+                        <h:commandLink style="display:block;height:20px" value="#{c.serialno}" action="#{Cpe.getItem}" reRender="cpelist,cpedetails">
+                            <a4j:actionparam name="id" value="#{c.id}" assignTo="#{Cpe.id}"/>
+                        </h:commandLink>
+                    </rich:column>
+                </rich:dataTable>
+            </a4j:form>
+
+            <a4j:form  id="cpedetails" >
+                <h:panelGrid class="dr-pnl-b rich-panel-body" columns="1"  rendered="#{Cpe.findResultLength==1}" >
+                    <h:panelGroup> <fieldset>
+
+                            <h:outputText value="Serial number: "/>
+                            <h:outputText value="#{Cpe.sn}" />
+                            <h:outputText value=" Hardware: "/>
+                            <h:outputText value="#{Cpe.hardware}" />
+                            <h:outputText value=" Current software: "/>
+                            <h:outputText value="#{Cpe.currversion}" />
+                            <h:outputText value=" Current config: "/>
+                            <h:outputText value="#{Cpe.cfgversion}" />
+                            <h:outputText value=" Last inform at: "/>
+                            <h:outputText value="#{Cpe.lastcontact}" />
+
+                        </fieldset></h:panelGroup>
+                    <h:panelGroup>
+                        <fieldset>
+                            <h:outputText value="Connection request URL: "/>
+                            <h:outputText value="#{Cpe.url} " />
+                            <h:outputText value=" user: "/>
+                            <h:inputText value="#{Cpe.conreqUser}" />
+                            <h:outputText value=" password: "/>
+                            <h:inputText value="#{Cpe.conreqPass}" />
+
+                            <rich:progressBar id ="pb" value="#{Cpe.currentValue}"
+                                              interval="1000" label="#{Cpe.currentValue} %"
+                                              enabled="#{Cpe.inProgress}" minValue="-1" maxValue="100"
+                                              reRenderAfterComplete="cpedetails">
+                                <f:facet name="initial">
+                                    <a4j:commandButton type="Submit" action="#{Cpe.connectionRequest}"
+                                                       value="Request connection" reRender="pb,cpedetails"
+                                                       rendered="#{!Cpe.inProgress}"
+                                                       />
+                                </f:facet>
+                                <f:facet name="complete">
+                                    <a4j:commandButton type="Submit" action="#{Cpe.connectionRequest}"
+                                                       value="Request connection" reRender="pb,cpedetails"
+                                                       rendered="#{!Cpe.inProgress}"
+                                                       />
+                                </f:facet>
+                            </rich:progressBar>
+
+                            <h:outputText value="Last Conreq: "/>
+                            <h:outputText value="#{Cpe.reqRes}" />
+                        </fieldset>
+                    </h:panelGroup>
+                    <h:panelGroup> <fieldset>
+                            <h:outputText value="Authentication: " />
+                            <h:selectOneMenu  value="#{Cpe.authType}" >
+                                <f:selectItem   itemValue="0" itemLabel="None" />
+                                <f:selectItem   itemValue="1" itemLabel="Basic" />
+                                <f:selectItem   itemValue="2" itemLabel="MD5" />
+                            </h:selectOneMenu>
+
+                            <h:outputText value=" Username: " />
+                            <h:inputText value="#{Cpe.user}"/>
+                            <h:outputText value=" Password: " />
+                            <h:inputText value="#{Cpe.password}"/>
+                        </fieldset></h:panelGroup>
+                    <h:panelGroup> <fieldset>
+                            <h:outputText value="Config name: "/>
+                            <h:selectOneMenu  value="#{Cpe.configname}" >
+                                <f:selectItems   value="#{Cpe.configs}" />
+                            </h:selectOneMenu>
+                            <h:outputText value=" Current config version: "/>
+                            <h:outputText value="#{Cpe.cfgversion}" />
+                            <h:outputText value=" Config update attempted at: "/>
+                            <h:outputText value="#{Cpe.cfgupdtime}" />
+                            <h:outputText value=" Config update result: "/>
+                            <h:outputText value="#{Cpe.cfgupdres}" />
+                        </fieldset></h:panelGroup>
+                    <h:panelGroup> <fieldset>
+                            <h:outputText value=" Current software: "/>
+                            <h:outputText value="#{Cpe.currversion}" />
+                            <h:outputText value=" Software update attempted at: "/>
+                            <h:outputText value="#{Cpe.sfwupdtime}" />
+                            <h:outputText value=" Software update result: "/>
+                            <h:outputText value="#{Cpe.sfwupdres}" />
+
+                        </fieldset></h:panelGroup>
+                    <h:panelGrid columns="1" >
+
+                        <h:outputText value="Customer ID:" />
+                        <h:inputText value="#{Cpe.customerId}"/>
+
+                        <h:outputText value="Properties: (can be used in scripts and in configurations )"/>#<b></b>{property_name}
+                        <h:inputTextarea  rows="20" cols="100" value="#{Cpe.proptext}"/>
+                    </h:panelGrid>
+                    <a4j:commandButton type="submit" value="Save" action="#{Cpe.Save}" reRender="cpedetails" />
+                </h:panelGrid>
+
+            </a4j:form>
+        </ui:define>
+
+    </ui:composition>
+</html>

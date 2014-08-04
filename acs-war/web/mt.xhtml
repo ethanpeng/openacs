@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8"/>
+        <title>
+            <ui:insert name="title"/>
+        </title>
+        <style type="text/css">
+            body{
+                background-image : url(${facesContext.externalContext.requestContextPath}/images/page_bg.gif);
+            }
+            td{
+                vertical-align: top ;
+            }
+
+            li{
+                list-style : outside url(${facesContext.externalContext.requestContextPath}/images/bullet_arrow.gif);
+            }
+        </style>
+        <link rel="STYLESHEET" type="text/css" href="${facesContext.externalContext.requestContextPath}/css/common.css"/>
+    </head>
+
+    <body>
+
+        <ui:include src="h.xhtml" />
+        <table class="left_menu" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+                <tr>
+                    <td>
+                        <ui:include src="r.xhtml" />
+                        <div class="menu_separator">
+                            &nbsp;
+                        </div>
+                        <rich:panel styleClass="panel_menu">
+                            <ui:insert name="lmenu"></ui:insert>
+                        </rich:panel>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table cellpadding="0" cellspacing="0" border="0" class="content_container" width="100%">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="content_container_left_brick"></div>
+                    </td>
+                    <td width="100%" class="content_container_pdddings">
+                        <rich:messages layout="list">
+                            <f:facet name="errorMarker">
+                                <h:graphicImage value="/images/error.gif" />
+                            </f:facet>
+                            <f:facet name="infoMarker">
+                                <h:graphicImage  value="/images/ok.gif" />
+                            </f:facet>
+                            <f:facet name="warnMarker">
+                                <h:graphicImage  value="/images/warn.gif" />
+                            </f:facet>
+
+                        </rich:messages>
+
+                        <ui:insert name="body">Body</ui:insert>
+                        <rich:spacer style="height:10px;" />
+                        <rich:separator style="height:1px" />
+                        <div style="float:right;" class="footer-text">#{environment.version}</div>
+                        <div style="float:none">
+                            <a href="http://sourceforge.net/projects/openacs" style="color:#000; display:block"  class="footer-text">openACS</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>

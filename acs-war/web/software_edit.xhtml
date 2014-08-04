@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Device management</ui:define>
+        <ui:define name="body">
+            <h4><h:outputText value="#{Software.hwModel}: #{Software.version}" /></h4>
+            <rich:tabPanel switchType="server" width="700px">
+                <rich:tab label="Image">
+                    <a4j:form id="swform">
+                        <h:inputHidden value="#{Software.hwid}"/>
+                        <h:inputHidden value="#{Software.version}"/>
+                        <p>Here you can set firmware for device.<br />
+                            Also you can put firmware to #{Software.fwPath} by any other means<br/>
+                            and only assign the file here instead of uploading it via web <br/>
+                            which can be problemmatic with big files.
+                        </p>
+                        <ui:include src="/software_fields.xhtml" />
+                        <h:commandButton class="rich-button" value="Save" action="#{Software.Save}" />
+                        <h:commandButton class="rich-button" value="Delete" action="#{Software.Delete}" onclick="if (!confirm('Are you sure?')) { return false; }"/>
+                    </a4j:form>
+                </rich:tab>
+                <rich:tab label="Methods supported" rendered="#{Software.haveDetails}">
+                    <ui:include src="software_methods_1.xhtml" />
+                </rich:tab>
+                <rich:tab label="Parameters supported" rendered="#{Software.haveDetails}" >
+                    <ui:include src="software_paramnames_1.xhtml" />
+                </rich:tab>
+            </rich:tabPanel>
+        </ui:define>
+        <ui:define name="lmenu"><ui:include src="device_menu.xhtml" /> </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="make" name="acs-war-impl">
+    <property file="../build.properties"/>
+    <target name="clean">
+        <delete dir="build"/>
+        <delete dir="dist"/>
+    </target>
+    <target name="make">
+        <ant antfile="../acs-ejb/b.xml" inheritall="false" target="make" />
+        <mkdir dir="build"/>
+        <copy todir="build">
+            <fileset dir="web"/>
+        </copy>
+        <copy todir="build/WEB-INF/lib">
+            <fileset dir="lib"/>
+        </copy>
+        <mkdir dir="build/WEB-INF/classes"/>
+        <javac destdir="build/WEB-INF/classes" fork="yes" includeantruntime="false" srcdir="src/java" target="1.5" debug="on">
+            <classpath>
+                <fileset dir="${j2ee.lib}">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <fileset dir="${jsf.lib}">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <fileset dir="build/WEB-INF/lib">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <pathelement location="../acs-ejb/dist/acs-ejb.jar"/>
+                <path path="@{classpath}"/>
+            </classpath>
+            <compilerarg line="-Xlint:unchecked"/>
+        </javac>
+        <mkdir dir="dist"/>
+        <jar compress="${jar.compress}" jarfile="dist/acs-war.war">
+            <fileset dir="build"/>
+        </jar>
+        
+    </target>
+    <target name="test">
+        <junit>
+            <classpath>
+                <fileset dir="${j2ee.lib}">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <fileset dir="${jsf.lib}">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <fileset dir="build/WEB-INF/lib">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <pathelement location="../acs-ejb/dist/acs-ejb.jar"/>
+                <pathelement location="C:/Program Files/NetBeans 6.5/java2/modules/ext/junit-3.8.2.jar" />
+                <path path="@{classpath}"/>
+            </classpath>
+            <test name="my.test.TestCase"/>
+        </junit>
+
+    </target>
+    
+</project>

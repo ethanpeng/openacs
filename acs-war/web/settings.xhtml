@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Server settings</ui:define>
+        <ui:define name="body">
+            <h3>Settings</h3>
+            <a4j:form>
+                <h:panelGrid columns="1">
+                    <h:outputText value="Real server IP (if behind NAT):" />
+                    <h:inputText value="#{Settings.overrideServerName}"/>
+                    <h:outputText value="Networks not NATed for which above setting is ignored." />
+                    <h:outputText value="(networks in form a.b.c.d/bits or a.b.c.d/ma.mb.mc.md separated by spaces)" />
+                    <h:inputText value="#{Settings.noNatNet}"/>
+                    <h:outputText value="CPE creation:" />
+                    <h:selectOneRadio value="#{Settings.autoCreateCpe}">
+                        <f:selectItem itemLabel="Automatical" itemValue="true" />
+                        <f:selectItem itemLabel="Manual" itemValue="false" />
+                    </h:selectOneRadio>
+                    <h:outputText value="Firmware directory:" />
+                    <h:inputText value="#{Settings.firmwarePath}"/>
+                    <h:outputText value="STUN port:" />
+                    <h:outputText value="(The STUN server must be installed separatelly and should run on this port if you want connection request via UDP)" />
+                    <h:inputText value="#{Settings.STUNPort}">
+                        <f:validateLongRange minimum="1" maximum="65535" />
+                    </h:inputText>
+                    <h:commandButton class="rich-button" type="submit" value="Save" action="#{Settings.Save}"/>
+
+                </h:panelGrid>
+            </a4j:form >
+        </ui:define>
+    </ui:composition>
+</html>

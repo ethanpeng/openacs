@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<configuration xmlns='http://java.sun.com/xml/ns/jax-rpc/ri/config'>
+	<service name='OpenACS' targetNamespace='urn:OpenACS/wsdl' typeNamespace='urn:OpenACS/types' packageName='org.openacs.ws'>
+		<interface name='org.openacs.ws.OpenACSSEI' servantName='org.openacs.ws.OpenACSBean'>
+		</interface>
+	</service>
+</configuration>

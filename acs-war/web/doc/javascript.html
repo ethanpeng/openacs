@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta name="keywords" content="JavaScript" />
+        <title>JavaScript</title>
+        <link rel="stylesheet" href="../css/doc.css" type="text/css" media="screen" />
+    </head>
+
+    <body class="mediawiki ltr ns-0 ns-subject page-JavaScript skin-sourceforge">
+
+        <div id="bodyContent">
+            <div id="jump-to-nav">
+            Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>
+            <!-- start content -->
+            <table id="toc" class="toc" summary="Contents">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div id="toctitle">
+                                <h2>Contents</h2>
+                            </div>
+                            <ul>
+                                <li class="toclevel-1"><a href="#Configurations_script">
+                                <span class="tocnumber">1</span> <span class="toctext">Configurations script</span></a></li>
+                                <li class="toclevel-1"><a href="#Globals"><span class="tocnumber">2</span>
+                                    <span class="toctext">Globals</span></a>
+                                    <ul>
+                                        <li class="toclevel-2"><a href="#Functions"><span class="tocnumber">2.1</span>
+                                            <span class="toctext">Functions</span></a>
+                                            <ul>
+                                                <li class="toclevel-3"><a href="#logger"><span class="tocnumber">2.1.1</span>
+                                                <span class="toctext">logger</span></a></li>
+                                                <li class="toclevel-3"><a href="#call"><span class="tocnumber">2.1.2</span>
+                                                <span class="toctext">call</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="toclevel-2"><a href="#Variables"><span class="tocnumber">2.2</span>
+                                            <span class="toctext">Variables</span></a>
+                                            <ul>
+                                                <li class="toclevel-3"><a href="#cpedb"><span class="tocnumber">2.2.1</span>
+                                                <span class="toctext">cpedb</span></a></li>
+                                                <li class="toclevel-3"><a href="#cpe"><span class="tocnumber">2.2.2</span>
+                                                <span class="toctext">cpe</span></a></li>
+                                                <li class="toclevel-3"><a href="#db"><span class="tocnumber">2.2.3</span>
+                                                <span class="toctext">db</span></a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); }
+            </script>
+            <a name="Configurations_script" id="Configurations_script"></a>
+            <h1><span class="mw-headline">Configurations script</span></h1>
+            <p>OpenACS supports configuration scripts written in
+                <a href="http://en.wikipedia.org/wiki/Javascript" class="external text" title="http://en.wikipedia.org/wiki/Javascript" rel="nofollow">
+                JavaScript</a>. If you want use scripts to configure CPE you must have script
+                named 'Default' because this is the script the server will try to run on CPE Inform
+                request when it has no configuration files or firmware updates requestss pending
+            . </p>
+            <a name="Globals" id="Globals"></a>
+            <h1><span class="mw-headline">Globals</span></h1>
+            <a name="Functions" id="Functions"></a>
+            <h2><span class="mw-headline">Functions</span></h2>
+            <a name="logger" id="logger"></a>
+            <h3><span class="mw-headline">logger</span></h3>
+            <p>Function provides acces to standard application server logger facility. </p>
+            <pre>logger ('My message') // message with default severity WARNING is logged.
+logger ('severe', 'Error message')
+logger ('warning', 'Warning message')
+logger ('info', 'Informational message)
+            </pre>
+            <a name="call" id="call"></a>
+            <h3><span class="mw-headline">call</span></h3>
+            <p>Function lets to run another script. </p>
+            <pre>call ('script_name')
+            </pre>
+            <a name="Variables" id="Variables"></a>
+            <h2><span class="mw-headline">Variables</span></h2>
+            <a name="cpedb" id="cpedb"></a>
+            <h3><span class="mw-headline">cpedb</span></h3>
+            <p>cpedb global variable provides acces to CPE bean in database, namely to properties
+                field. They can be accessed as usual javascript properties. To save them back
+                to database method Save should be used. This object is intended to assign configuration
+            properties for user. </p>
+            <pre>var someprop = cpedb.someprop;
+cpedb.someprop = 'new_value_for_someprop';
+cpedb.Save ();
+            </pre>
+            <a name="cpe" id="cpe"></a>
+            <h3><span class="mw-headline">cpe</span></h3>
+            <p>cpe global variable provides access to all the CPE variables and RPC calls
+            specified in TR-069. </p>
+            <p><b>Properties</b> Inform - exposes Inform request which triggered configuration
+            script to run. </p>
+            <p><b>Methods</b> GetRPCMethods () - return arrays of methods supported by CPE.
+            </p>
+            <pre>// this will output supported methods to server console
+var methods = cpe.GetRPCMethods ();
+for (i = 0; i &lt; methods.length; i++) {
+       logger ('Method: '+methods[i]);
+}
+            </pre>
+            <p>Download (commandKey, what_to_downlad, url, username, password, file_size,
+                file_name) - Tells CPE to start download configuration or firmware depending on
+            what_to_download parameter (possible values as specified in TR-069) </p>
+            <pre>var response = cpe.Download (&quot;daCommand&quot;, &quot;3 Vendor Configuration File&quot;,&quot;<a href="http://192.168.1.1:8080/kkonf" class="external free" title="http://192.168.1.1:8080/kkonf" rel="nofollow">http://192.168.1.1:8080/kkonf</a>&quot;, &quot;&quot;, &quot;&quot;,000,&quot;user.ini&quot;)
+logger (&quot;st=&quot;+response.StartTime+&quot; ct=&quot;+CompleteTime+&quot; status=&quot;+response.Status)
+            </pre>
+            <p>WaitForTransferComplete (timeout_in_seconds) - waits until CPE calls TransferComplete
+                with the commandKey specified in last Download method. GetParameterNames (root_name,
+                next_level) - returns array of objects with properties //name// and //writable//.
+            </p>
+            <pre>var names = cpe.GetParameterNames ('.', true);
+for (i = 0; i &lt; names.length; i++) {
+        cpe.log (names[i].name + ' -&gt; '+names[i].writable);
+}
+            </pre>
+            <p>GetParameterValues (array_of_parameter_names) - return array of object with
+            properties //name// and //value//. </p>
+            <pre>var parameters = new Array ();
+parameters[0] = 'InternetGatewayDevice.DeviceSummary';
+var response = cpe.GetParameterValues (parameters);
+logger (response[0].name+'='+response[0].value);
+            </pre>
+            <p>SetParameterValues (params_array, commandKey) - sets parameter values. Params_array
+            is array of objects having properties //name// and //value//. </p>
+            <pre>var parameters = new Array ();
+parameters[0] = {name: 'InternetGatewayDevice.IPPingDiagnostics.Host', value: '192.168.0.1'};
+// Encode parameter using default type xsd:string
+parameters[1] = {name: 'InternetGatewayDevice.IPPingDiagnostics.NumberOfRepetitions', value: '2'};
+// set encoding type
+parameters[2] = {name: 'InternetGatewayDevice.IPPingDiagnostics.NumberOfRepetitions', value: '2', type: 'xsd:unsignedInt'};
+cpe.SetParameterValues (parameters, &quot;commandKey&quot;);
+            </pre>
+            <p>AddObject (top_object_name, parameterKey) - creates new object instance. Returns
+                object with properties //Status// and //InstanceNumber.// DeleteObject (object_name,
+                parameterKey) - delete object. Returns integer status. SetParameterAttributes
+            (params_array) - set attributes for parameters. Returns nothing. </p>
+            <pre>var parameters = new Array();
+parameters[0]=new Object;
+parameters[0].Name='InternetGatewayDevice.IPPingDiagnostics.NumberOfRepetitions';
+parameters[0].Notification=0;
+parameters[0].NotificationChange=true;
+parameters[0].AccessListChange=true;
+parameters[0].AccessList= new Array ();
+parameters[0].AccessList[0]='subscriber';
+cpe.SetParameterAttributes (parameters);
+            </pre>
+            <p>GetParameterAttributes (parameter_names_array). </p>
+            <p>Reboot (commandKey) - reboots cpe. </p>
+            <pre>cpe.Reboot (&quot;commandKey&quot;);
+            </pre>
+            <p>FactoryReset - resets cpe to factory default settings. Method is optional in
+            cpe so not all of them has support for it. </p>
+            <pre>cpe.FactoryReset ();
+            </pre>
+            <p>ScheduleInform (seconds_to_delay, commandKey) - request the CPE to schedule
+                a one-time Inform method call (separate from its periodic Inform method calls)
+                sometime in the future. Method is optional in cpe so not all of them has support
+            for it. </p>
+            <pre>cpe.ScheduleInform (3600, &quot;commandKey&quot;); // schedule inform in one hour
+            </pre>
+            <p>X_00000C_ShowStatus (array_of_show_commands) - Cisco proprietary method to
+            run several show commands and get their output. </p>
+            <pre>var commands = new Array ();
+commands [0] = &quot;show version&quot;;
+commands [1] = &quot;show running&quot;;
+var response = cpe.X_00000C_ShowStatus (commands);
+var thecommand = response [0].Command;
+var itsoutput = response [0].Response;
+            </pre>
+            <p>X_JUNGO_COM_RGCommand (telnet_command) - jungo.com OpenRG based firmware proprietary
+            method to run command. </p>
+            <pre>var response = cpe.X_JUNGO_COM_RGCommand (&quot;net ifconfig&quot;);
+var result = response.Result; // output of command
+var status = response.Status; // status - 0 if succes
+            </pre>
+            <a name="db" id="db"></a>
+            <h3><span class="mw-headline">db</span></h3>
+            <p>This object allows to work with database. The database can be the same the
+                openacs uses to store data as well as external datasource configured similar to
+                datasource in
+                <a href="https://sourceforge.net/apps/mediawiki/openacs/index.php?title=Main_Page#Deploying" class="external autonumber" title="https://sourceforge.net/apps/mediawiki/openacs/index.php?title=Main_Page#Deploying" rel="nofollow">
+            [1]</a> step 3 </p>
+            <p>This would run SELECT query on datasource named the data_source_name.<br />
+                db.Query (data_source_name, select_statement)<br />
+            </p>
+            <p>This would run query on openacs datasource &quot;java:ACS&quot;.<br />
+                db.Query (select_statement) <br />
+                it is equivalent to db.Query (&quot;java:ACS&quot;, select_statement)<br />
+            </p>
+            <p>returns array of objects with fields name as in query e.g. </p>
+            <pre>try {
+    var rs = db.Query (&quot;SELECT id,serialno FROM hostsbean&quot;)
+    logger (&quot;Rows found = &quot;+rs.length)
+    for (i=0; i &lt; rs.length; i++) {
+        logger (&quot;id = &quot;+rs[i].id+&quot; serialno= &quot;+rs[i].serialno);
+    }
+} catch (e) {
+    logger (&quot;DS exception: &quot;+e.message)
+}
+            </pre>
+            <p>To run INSERT or UPDATE queries use Update function.<br />
+                db.Update (data_source_name, select_statement)<br />
+            </p>
+            <p>This would run query on openacs datasource &quot;java:ACS&quot;.<br />
+                db.Update (select_statement) <br />
+            </p>
+            <p>returns count of rows affected e.g. </p>
+            <pre>try {
+    var rs = db.Update (&quot;INSERT id,serialno INTO hostsbean VALUES (NULL,'12345')&quot;)
+} catch (e) {
+    logger (&quot;DS exception: &quot;+e.message)
+}
+            </pre>
+        </div>
+
+    </body>
+
+</html>

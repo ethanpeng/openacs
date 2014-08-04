@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE facelet-taglib PUBLIC
+  "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+  "http://java.sun.com/dtd/facelet-taglib_1_0.dtd">
+<facelet-taglib>
+    <namespace>http://theopenacs.org/components</namespace>
+    <tag>
+        <tag-name>param</tag-name>
+        <component>
+            <component-type>org.openacs.Param</component-type>
+            <!-- <renderer-type>org.richfaces.ColumnGroupRenderer</renderer-type> -->
+        </component>
+    </tag>
+    <tag>
+        <tag-name>form</tag-name>
+        <component>
+            <component-type>org.openacs.Form</component-type>
+            <!-- <renderer-type>org.richfaces.ColumnGroupRenderer</renderer-type> -->
+        </component>
+    </tag>
+</facelet-taglib>

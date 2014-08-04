@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Cpe info for #{Cpe.sn}</ui:define>
+        <ui:define name="body">
+
+            <a4j:form  id="cpedetails" >
+                <h:panelGrid class="dr-pnl-b rich-panel-body" columns="1"  rendered="#{Cpe.findResultLength==1}" >
+                    <h:panelGroup>
+                        <fieldset>
+                            <h:outputText value="Connection request user: "/>
+                            <h:inputText value="#{Cpe.conreqUser}" />
+                            <h:outputText value=" password: "/>
+                            <h:inputText value="#{Cpe.conreqPass}" />
+                        </fieldset>
+                    </h:panelGroup>
+                    <h:panelGroup> <fieldset>
+                            <h:outputText value="Authentication: " />
+                            <h:selectOneMenu  value="#{Cpe.authType}" >
+                                <f:selectItem   itemValue="0" itemLabel="None" />
+                                <f:selectItem   itemValue="1" itemLabel="Basic" />
+                                <f:selectItem   itemValue="2" itemLabel="MD5" />
+                            </h:selectOneMenu>
+
+                            <h:outputText value=" Username: " />
+                            <h:inputText value="#{Cpe.user}"/>
+                            <h:outputText value=" Password: " />
+                            <h:inputText value="#{Cpe.password}"/>
+                        </fieldset></h:panelGroup>
+                    <h:panelGroup> <fieldset>
+                            <h:outputText value="Profile: "/>
+                            <h:selectOneMenu  value="#{Cpe.profileName}" >
+                                <f:selectItems   value="#{DeviceProfile.list}" />
+                            </h:selectOneMenu>
+                            <h:outputText value="Config name: "/>
+                            <h:selectOneMenu  value="#{Cpe.configname}" >
+                                <f:selectItems   value="#{Cpe.configs}" />
+                            </h:selectOneMenu>
+                        </fieldset></h:panelGroup>
+                    <h:panelGroup> <fieldset>
+                            <h:outputText value="Customer ID:" />
+                            <h:inputText value="#{Cpe.customerId}"/>
+                        </fieldset></h:panelGroup>
+                    <h:panelGrid columns="1" >
+
+
+                        <h:outputText value='Properties: (can be used in scripts and in configurations ) &#35; {property_name}' />
+                        <h:inputTextarea  rows="20" cols="100" value="#{Cpe.proptext}"/>
+                    </h:panelGrid>
+                    <a4j:commandButton type="submit" value="Save" action="#{Cpe.Save}" reRender="cpedetails" />
+                </h:panelGrid>
+
+            </a4j:form>
+        </ui:define>
+        <ui:define name="lmenu"><ui:include src="cpe_menu.xhtml" /> </ui:define>
+
+    </ui:composition>
+</html>

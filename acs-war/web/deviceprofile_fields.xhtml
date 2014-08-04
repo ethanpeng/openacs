@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition>
+        <fieldset>
+            <h:panelGrid columns="2" class="dr-pnl-b rich-panel-body">
+                <h:outputText value="periodicInformInterval:" />
+                <h:inputText value="#{DeviceProfile.periodicInformInterval}"/>
+                <h:outputText value="Days to keep statistics (days). 0 - don't keep:" />
+                <h:inputText value="#{DeviceProfile.daysToKeepStats}"/>
+                <h:outputText value="Save parameter values once in this interval (in hours). 0 - don't save:" />
+                <h:inputText id="saveParamValuesInterval" value="#{DeviceProfile.saveParamValuesInterval}">
+                    <f:validateLongRange minimum="0" />
+                </h:inputText>
+            </h:panelGrid>
+        </fieldset>
+        <rich:spacer height="3" />
+        <fieldset>
+            <h:panelGrid columns="20" class="dr-pnl-b rich-panel-body">
+                <h:selectBooleanCheckbox value="#{DeviceProfile.saveParamValuesOnBoot}">Save parameter values on events BOOT</h:selectBooleanCheckbox>
+                <h:selectBooleanCheckbox value="#{DeviceProfile.saveParamValuesOnChange}">VALUECHANGE</h:selectBooleanCheckbox>
+            </h:panelGrid>
+        </fieldset>
+        <rich:spacer height="3" />
+        <fieldset>
+            <h:panelGrid columns="20" class="dr-pnl-b rich-panel-body">
+                <h:outputText value="Configuration script to be run: " />
+                <h:selectOneMenu id="scripts" value="#{DeviceProfile.scriptName}" width="150" >
+                    <f:selectItems   value="#{DeviceProfile.scriptNames}" />
+                </h:selectOneMenu>
+            </h:panelGrid>
+        </fieldset>
+    </ui:composition>
+</html>

@@ -1,0 +1,6 @@
+Requirements: 
+	Jboss 4.2.2 and JRE 1.5 (for webservices to work)
+
+Installation: 
+	acs.ear and openacs-ds.xml go to your default deployment directory, typically to server/default/deploy under jboss installation dir. openacs-ds.xml should be edited to meet your DB environement. acs-service.xml goes to server/default/deploy/jms.
+	Web interface is accessible on your installation host under url  /openacs ( e.g. http://localhost:8080/openacs. device should be configured to access ACS on URL http://your_host:8080/openacs/acs. There is no authorization configured for now as it can be changed with deployment descriptors. 

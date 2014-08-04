@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="make" name="acs-war-impl">
+    <target name="clean">
+        <delete dir="build"/>
+        <delete dir="dist"/>
+    </target>
+    <target name="make">
+        <ant antfile="../acs-ejb/b.xml" inheritall="false" target="make" >
+            <property name="j2ee.lib" value="${j2ee.lib}" />
+            <property name="jb5" value="${jb5}" />
+        </ant>
+        <mkdir dir="build"/>
+        <copy todir="build">
+            <fileset dir="web"/>
+        </copy>
+        <copy todir="build/WEB-INF/lib">
+            <fileset dir="lib">
+                <include name="**/*" />
+                <exclude name="xercesImpl*" if="jb5" />
+                <exclude name="xml-apis-*" if="jb5" />
+            </fileset>
+        </copy>
+        <copy todir="build/META-INF">
+            <fileset dir="web/WEB-INF" >
+                <include name="*.taglib.xml"/>
+            </fileset>
+        </copy>
+        <mkdir dir="build/WEB-INF/classes"/>
+        <copy todir="build/WEB-INF/classes">
+            <fileset dir="web/WEB-INF" >
+                <include name="*.skin.properties"/>
+            </fileset>
+        </copy>
+        <javac destdir="build/WEB-INF/classes" fork="yes" includeantruntime="false" srcdir="src/java" target="1.5" debug="on">
+            <classpath>
+                <fileset dir="${j2ee.lib}">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <fileset dir="${jsf.lib}">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <fileset dir="build/WEB-INF/lib">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <pathelement location="../acs-ejb/dist/acs-ejb.jar"/>
+                <path path="@{classpath}"/>
+            </classpath>
+            <compilerarg line="-Xlint:unchecked"/>
+        </javac>
+        <mkdir dir="dist"/>
+        <jar compress="${jar.compress}" jarfile="dist/acs-war.war">
+            <fileset dir="build"/>
+        </jar>
+
+    </target>
+
+   <target name="makeprot" depends="make">
+       <move file="build/WEB-INF/web.prot.xml" tofile="build/WEB-INF/web.xml" />
+       <delete file="dist/acs-war.war" />
+       <jar compress="${jar.compress}" jarfile="dist/acs-war.war" >
+            <fileset dir="build"/>
+       </jar>
+   </target>
+</project>

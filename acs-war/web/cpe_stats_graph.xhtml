@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Cpe info for #{Cpe.sn}</ui:define>
+        <ui:define name="body">
+            <a4j:form>
+                <h:panelGrid columns="7">
+                    <h:outputText value="Time from: " />
+                    <a4j:outputPanel id="calendarf" layout="block">
+                        <rich:calendar value="#{Cpe.timeFrom}"
+                                       locale="en/US"
+                                       popupstream="true"
+                                       datePattern="dd/M/yy hh:mm a"
+                                       showApplyButton="true" style="width:200px"/>
+                    </a4j:outputPanel>
+                    <h:outputText value=" to: " />
+                    <a4j:outputPanel id="calendart" layout="block">
+                        <rich:calendar value="#{Cpe.timeTo}"
+                                       locale="en/US"
+                                       popupstream="true"
+                                       datePattern="dd/M/yy hh:mm a"
+                                       showApplyButton="true" style="width:200px"/>
+                    </a4j:outputPanel>
+
+
+                    <h:commandButton class="rich-button" value="Graph" action="#{Cpe.findStats}" reRender="graphs"/>
+                </h:panelGrid>
+                <h:panelGrid columns="1" id="graphs" rendered="#{Cpe.dslStatsReady}">
+                    <rich:spacer height="30" />
+                    <h:panelGrid columns="3">
+                        <h:outputText value="Current rates (Kbps)" />
+                        <h:outputText value="Downstream " style="color:rgb(0, 207, 0)"/>
+                        <h:outputText value="Upstream" style="color:rgb(0, 42, 151)" />
+                    </h:panelGrid>
+
+                    <rich:paint2D id="graph1" width="650" height="230" rendered="#{Cpe.dslStatsReady}"
+                                  data="#{LineStatsGraphData}" format="png" paint="#{Cpe.lineParamsGraphCurrentRate}" />
+                    <rich:spacer height="30" />
+                    <h:panelGrid columns="3">
+                        <h:outputText value="Attainable rates (Kbps)" />
+                        <h:outputText value="Downstream " style="color:rgb(0, 207, 0)"/>
+                        <h:outputText value="Upstream" style="color:rgb(0, 42, 151)" />
+                    </h:panelGrid>
+                    <rich:paint2D id="graph2" width="650" height="230" rendered="#{Cpe.dslStatsReady}"
+                                  data="#{LineStatsGraphData}" format="png" paint="#{Cpe.lineParamsGraphMaxRate}" />
+                    <rich:spacer height="30" />
+                    <h:panelGrid columns="3">
+                        <h:outputText value="Attenuation (dB)" />
+                        <h:outputText value="Downstream " style="color:rgb(0, 207, 0)"/>
+                        <h:outputText value="Upstream" style="color:rgb(0, 42, 151)" />
+                    </h:panelGrid>
+                    <rich:paint2D id="graph3" width="650" height="230" rendered="#{Cpe.dslStatsReady}"
+                                  data="#{LineStatsGraphData}" format="png" paint="#{Cpe.lineParamsGraphAttenuation}" />
+                    <rich:spacer height="30" />
+                    <h:panelGrid columns="3">
+                        <h:outputText value="Power (dBmV)" />
+                        <h:outputText value="Downstream " style="color:rgb(0, 207, 0)"/>
+                        <h:outputText value="Upstream" style="color:rgb(0, 42, 151)" />
+                    </h:panelGrid>
+                    <rich:paint2D id="graph4" width="650" height="230" rendered="#{Cpe.dslStatsReady}"
+                                  data="#{LineStatsGraphData}" format="png" paint="#{Cpe.lineParamsGraphPower}" />
+                    <rich:spacer height="30" />
+                    <h:panelGrid columns="3">
+                        <h:outputText value="Noise margin (dB)" />
+                        <h:outputText value="Downstream " style="color:rgb(0, 207, 0)"/>
+                        <h:outputText value="Upstream" style="color:rgb(0, 42, 151)" />
+                    </h:panelGrid>
+                    <rich:paint2D id="graph5" width="650" height="230" rendered="#{Cpe.dslStatsReady}"
+                                  data="#{LineStatsGraphData}" format="png" paint="#{Cpe.lineParamsGraphNoiseMargin}" />
+                </h:panelGrid>
+            </a4j:form >
+            <rich:spacer width="1" height="5"/>
+        </ui:define>
+
+        <ui:define name="lmenu"><ui:include src="cpe_menu.xhtml" /> </ui:define>
+
+    </ui:composition>
+</html>

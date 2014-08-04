@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Cpe info for #{Cpe.sn}</ui:define>
+        <ui:define name="body">
+            <a4j:form>
+                <h:panelGrid columns="7">
+                    <h:outputText value="Time from: " />
+                    <a4j:outputPanel id="calendarf" layout="block">
+                        <rich:calendar value="#{Cpe.timeFrom}"
+                                       locale="en/US"
+                                       popupstream="true"
+                                       datePattern="dd/M/yy hh:mm a"
+                                       showApplyButton="true" style="width:200px"/>
+                    </a4j:outputPanel>
+                    <h:outputText value=" to: " />
+                    <a4j:outputPanel id="calendart" layout="block">
+                        <rich:calendar value="#{Cpe.timeTo}"
+                                       locale="en/US"
+                                       popupstream="true"
+                                       datePattern="dd/M/yy hh:mm a"
+                                       showApplyButton="true" style="width:200px"/>
+                    </a4j:outputPanel>
+
+
+                    <h:commandButton class="rich-button" value="Details" action="#{Cpe.findStats}" reRender="dslstatslist"/>
+                </h:panelGrid>
+                <rich:datascroller align="left"  for="dslstatslist" maxPages="20" rendered="#{Cpe.dslStatsReady}"/>
+                <rich:spacer height="30" />
+                <rich:dataTable width="483" id="dslstatslist" rows="10" columnClasses="col"
+                                value="#{Cpe.dslStats}" var="s"  rendered="#{Cpe.dslStatsReady}">
+                    <f:facet name="header">
+                        <rich:columnGroup>
+                            <rich:column  rowspan="2" width="150">
+                                <h:outputText styleClass="headerText" value="Time"/>
+                            </rich:column>
+                            <rich:column  colspan="2">
+                                <h:outputText styleClass="headerText" value="Attenuation (db)"/>
+                            </rich:column>
+                            <rich:column colspan="2">
+                                <h:outputText styleClass="headerText" value="Current rate (kbps)"/>
+                            </rich:column>
+                            <rich:column colspan="2" >
+                                <h:outputText styleClass="headerText" value="Max rate (kbps)"/>
+                            </rich:column>
+                            <rich:column colspan="2" >
+                                <h:outputText styleClass="headerText" value="Power (dBmV)"/>
+                            </rich:column>
+                            <rich:column colspan="2" >
+                                <h:outputText styleClass="headerText" value="Noise (db)"/>
+                            </rich:column>
+                            <rich:column breakBefore="true">
+                                <h:outputText styleClass="headerText" value="down"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText styleClass="headerText" value="up" />
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText styleClass="headerText" value="down"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText styleClass="headerText" value="up" />
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText styleClass="headerText" value="down"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText styleClass="headerText" value="up" />
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText styleClass="headerText" value="down"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText styleClass="headerText" value="up" />
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText styleClass="headerText" value="down"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText styleClass="headerText" value="up" />
+                            </rich:column>
+                        </rich:columnGroup>
+                    </f:facet>
+
+                    <rich:column>
+                        <h:outputText value="#{s.time}" />
+                    </rich:column>
+                    <rich:column style="text-align:right">
+                        <h:outputText value="#{s.downstreamAttenuation div 10}"/>
+                    </rich:column>
+                    <rich:column style="text-align:right">
+                        <h:outputText value="#{s.upstreamAttenuation div 10}" />
+                    </rich:column>
+                    <rich:column style="text-align:right">
+                        <h:outputText value="#{s.downstreamCurrRate}"/>
+                    </rich:column>
+                    <rich:column style="text-align:right">
+                        <h:outputText value="#{s.upstreamCurrRate}" />
+                    </rich:column>
+                    <rich:column style="text-align:right">
+                        <h:outputText value="#{s.downstreamMaxRate}"/>
+                    </rich:column>
+                    <rich:column style="text-align:right">
+                        <h:outputText value="#{s.upstreamMaxRate}" />
+                    </rich:column>
+                    <rich:column style="text-align:right">
+                        <h:outputText value="#{s.downstreamPower div 10}" />
+                    </rich:column>
+                    <rich:column style="text-align:right">
+                        <h:outputText value="#{s.upstreamPower div 10}" />
+                    </rich:column>
+                    <rich:column style="text-align:right">
+                        <h:outputText value="#{s.downstreamNoiseMargin div 10}" />
+                    </rich:column>
+                    <rich:column style="text-align:right">
+                        <h:outputText value="#{s.upstreamNoiseMargin div 10}" />
+                    </rich:column>
+
+
+
+                </rich:dataTable>
+            </a4j:form >
+            <rich:spacer width="1" height="5"/>
+        </ui:define>
+
+        <ui:define name="lmenu"><ui:include src="cpe_menu.xhtml" /> </ui:define>
+
+    </ui:composition>
+</html>

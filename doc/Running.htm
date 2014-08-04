@@ -1,0 +1,104 @@
+<style>
+<!--
+h1
+	{margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	page-break-after:avoid;
+	font-size:16.0pt;
+	font-family:Arial;
+	}
+ p.MsoNormal
+	{mso-style-parent:"";
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	margin-left:0cm; margin-right:0cm; margin-top:0cm}
+ li.MsoNormal
+	{mso-style-parent:"";
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	margin-left:0cm; margin-right:0cm; margin-top:0cm}
+-->
+</style>
+<h1>Compiling from source</h1>
+<p>To compile source distribution you must have JDK and Apache Ant.</p>
+<p>Edit build.properties file to set where is jboss located in your machine. Run ant with no args in directory where build.xml is located. The built 
+acs.ear will be in dist directory.</p>
+<h1>Deploying</h1>
+<p><br>
+Theoretically should run on any java application server but development and 
+testing was done using JBoss application server 4.2.2 and MySQL database server.
+<br>
+<br>
+To get OpenACS running you should:<br>
+1. Setup on your machine JBoss 4.2.2<br>
+2. Configure data source in jboss by creating openacs-ds.xml in JBoss default 
+deployment directory, by default JBoss_installation_dir/server/default/deploy<br>
+openacs-ds.xml:<br>
+<span style="background-color: #C0C0C0">&lt;?</span><span style="background-color: #C0C0C0">xml</span><span style="background-color: #C0C0C0">
+</span><span style="background-color: #C0C0C0">version</span><span style="background-color: #C0C0C0">=&quot;1.0&quot;
+</span><span style="background-color: #C0C0C0">encoding</span><span style="background-color: #C0C0C0">=&quot;</span><span style="background-color: #C0C0C0">UTF</span><span style="background-color: #C0C0C0">-8&quot;?&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">datasources</span><span style="background-color: #C0C0C0">&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">local</span><span style="background-color: #C0C0C0">-tx-datasource&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">jndi</span><span style="background-color: #C0C0C0">-name&gt;ACS&lt;/</span><span style="background-color: #C0C0C0">jndi</span><span style="background-color: #C0C0C0">-name&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">connection</span><span style="background-color: #C0C0C0">-url&gt;your_db_url, 
+e.g. </span><span style="background-color: #C0C0C0">jdbc</span><span style="background-color: #C0C0C0">:mysql://</span><span style="background-color: #C0C0C0">localhost</span><span style="background-color: #C0C0C0">/</span><span style="background-color: #C0C0C0">ACS</span><span style="background-color: #C0C0C0">&lt;/</span><span style="background-color: #C0C0C0">connection</span><span style="background-color: #C0C0C0">-url&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">driver</span><span style="background-color: #C0C0C0">-class&gt;com.mysql.jdbc.Driver&lt;/</span><span style="background-color: #C0C0C0">driver</span><span style="background-color: #C0C0C0">-class&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">user</span><span style="background-color: #C0C0C0">-name&gt;your_db_user&lt;/</span><span style="background-color: #C0C0C0">user</span><span style="background-color: #C0C0C0">-name&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">password</span><span style="background-color: #C0C0C0">&gt;your_db_password&lt;/</span><span style="background-color: #C0C0C0">password</span><span style="background-color: #C0C0C0">&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">min</span><span style="background-color: #C0C0C0">-pool-size&gt;5&lt;/</span><span style="background-color: #C0C0C0">min</span><span style="background-color: #C0C0C0">-pool-size&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">max</span><span style="background-color: #C0C0C0">-pool-size&gt;20&lt;/</span><span style="background-color: #C0C0C0">max</span><span style="background-color: #C0C0C0">-pool-size&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">idle</span><span style="background-color: #C0C0C0">-timeout-minutes&gt;5&lt;/</span><span style="background-color: #C0C0C0">idle</span><span style="background-color: #C0C0C0">-timeout-minutes&gt;<br>
+&lt;/</span><span style="background-color: #C0C0C0">local</span><span style="background-color: #C0C0C0">-tx-datasource&gt;<br>
+&lt;/</span><span style="background-color: #C0C0C0">datasources</span><span style="background-color: #C0C0C0">&gt;</span><br>
+3. Setup MySQL database server and create database and user to match the ones 
+you’ve configured in step 3.<br>
+f.e.<br>
+connect to your server and execute these commands<br>
+CREATE DATABASE ACS;<br>
+GRANT ALL ON ACS.* TO your_db_user IDENTIFIED BY ‘your_db_password’<br>
+<br>
+4. Create file openacs-service.xml in JBoss_installation_dir/server/default/deploy/jms<br>
+openacs-service.xml:<br>
+<span style="background-color: #C0C0C0">&lt;?</span><span style="background-color: #C0C0C0">xml</span><span style="background-color: #C0C0C0">
+</span><span style="background-color: #C0C0C0">version</span><span style="background-color: #C0C0C0">=&quot;1.0&quot;
+</span><span style="background-color: #C0C0C0">encoding</span><span style="background-color: #C0C0C0">=&quot;</span><span style="background-color: #C0C0C0">UTF</span><span style="background-color: #C0C0C0">-8&quot;?&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">server</span><span style="background-color: #C0C0C0">&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">mbean</span><span style="background-color: #C0C0C0">
+</span><span style="background-color: #C0C0C0">code</span><span style="background-color: #C0C0C0">=&quot;org.</span><span style="background-color: #C0C0C0">jboss</span><span style="background-color: #C0C0C0">.mq.server.jmx.Queue&quot; 
+name=&quot;</span><span style="background-color: #C0C0C0">jboss</span><span style="background-color: #C0C0C0">.mq.destination:service=</span><span style="background-color: #C0C0C0">Queue</span><span style="background-color: #C0C0C0">,name=</span><span style="background-color: #C0C0C0">acsQueue</span><span style="background-color: #C0C0C0">&quot;&gt;<br>
+&lt;</span><span style="background-color: #C0C0C0">depends</span><span style="background-color: #C0C0C0">
+</span><span style="background-color: #C0C0C0">optional</span><span style="background-color: #C0C0C0">-attribute-name=&quot;</span><span style="background-color: #C0C0C0">DestinationManager</span><span style="background-color: #C0C0C0">&quot;&gt;jboss.mq:service=</span><span style="background-color: #C0C0C0">DestinationManager</span><span style="background-color: #C0C0C0">&lt;/</span><span style="background-color: #C0C0C0">depends</span><span style="background-color: #C0C0C0">&gt;<br>
+&lt;/</span><span style="background-color: #C0C0C0">mbean</span><span style="background-color: #C0C0C0">&gt;<br>
+&lt;/</span><span style="background-color: #C0C0C0">server</span><span style="background-color: #C0C0C0">&gt;</span><br>
+<br>
+5. Copy openacs.ear to JBoss_installation_dir/server/default/deploy.<br>
+<br>
+</p>
+<h1>Running</h1>
+<p>
+<br>
+Web interface is accessible at http://your.server.ip:8080/openacs/index.jsf.</p>
+<p>
+You should configure your CPE with the URL of ACS, it is
+http://your.server.ip:8080/openacs/acs. 
+Also you should configure your CPE to send periodic Inform requests to server.</p>
+<p>
+Server responds to Inform RPC and puts information about device into database 
+(configurable via context parameter org.openacs.AutoCreateCPE), 
+compares software version reported and updates software if needed, then compares 
+version of config reported and does the same. After that messages from JMS queue 
+are processed.</p>
+<p>
+<b>Configs:</b> supports only text files which are put to cpe using Download RPC 
+call. It is required that configuration contains it's version number in such a 
+way that it is reported by CPE in Inform call (this is dependant on CPE model). 
+Some CPE's require that the config file had specific name (e.g. user.ini).</p>
+<p>
+<b>Software: </b>firmware images must be put manually into
+c:\firmware directory (that can be changed in 
+deployment descriptor in context parameter org.openacs.fwbase) and it must be 
+configured using web ui. </p>

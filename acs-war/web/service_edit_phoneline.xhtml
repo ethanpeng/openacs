@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:acs="http://theopenacs.org/components">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Service management</ui:define>
+        <ui:define name="body">
+            <h4><h:outputText value="Phone line: #{Service.name}" /></h4>
+            <h:form id="svcpleditform">
+                <h:inputHidden value="#{Service.name}"/>
+                <ui:include src="/service_fields.xhtml" />
+                <br />
+                <rich:tabPanel switchType="client" width="1000px" >
+                    <ui:include src="tab.xhtml">
+                        <ui:param name="tab" value="#{FormsBean.forms['phoneline'][0]}" />
+                    </ui:include>
+                </rich:tabPanel>
+                <br />
+                <h:commandButton id="saveservicebutton" class="rich-button" type="submit" value="Save" action="#{Service.save}" />
+                <h:commandButton id="deleteservicebutton" class="rich-button" type="submit" value="Delete" action="#{Service.delete}"  onclick="if (!confirm('Are you sure?')) { return false; }"/>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="lmenu"><ui:include src="service_menu.xhtml" /></ui:define>
+    </ui:composition>
+</html>

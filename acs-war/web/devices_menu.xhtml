@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition>
+        <a4j:form>
+            <rich:panelBar width="100%">
+                <rich:panelBarItem   id="modelsList" label="Devices">
+                    <table border="0" cellpadding="0" cellspacing="1">
+                        <tbody>
+                            <tr class="#{component.current?'active':'unactive'}" onmouseover="this.className='active';" onmouseout="this.className='#{component.current?'active':'unactive'}';">
+                                <td class="ico"><h:graphicImage value="/images/icon_script.gif" width="16" height="16" alt="" border="0" /></td>
+                                <td class="text" width="100%">
+                                    <h:commandLink style="display:block;height:20px" value="Create ..." action="#{HwModel.clear}" />
+
+                                </td>
+                            </tr>
+                            <a4j:repeat var="hwmodel" value="#{HwModel.all}">
+                                <tr class="#{component.current?'active':'unactive'}" onmouseover="this.className='active';" onmouseout="this.className='#{component.current?'active':'unactive'}';">
+                                    <td class="ico"><h:graphicImage value="/images/icon_script.gif" width="16" height="16" alt="" border="0" /></td>
+                                    <td class="text" width="100%">
+                                        <h:commandLink style="display:block;height:20px" value="#{hwmodel.displayName}" action="#{HwModel.load}">
+                                            <a4j:actionparam name="hwid" value="#{hwmodel.id}" assignTo="#{HwModel.id}"/>
+                                            <a4j:actionparam name="hwid2" value="#{hwmodel.id}" assignTo="#{Software.hwid}"/>
+                                            <a4j:actionparam name="hwid3" value="#{hwmodel.id}" assignTo="#{Config.hwid}"/>
+                                        </h:commandLink>
+                                    </td>
+                                </tr>
+                            </a4j:repeat>
+                        </tbody>
+                    </table>
+                </rich:panelBarItem>
+            </rich:panelBar>
+        </a4j:form>
+
+    </ui:composition>
+</html>

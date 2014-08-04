@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="make" name="OpenACS">
+    <property file="build.properties"/>
+    <property name="openacs.version" value="0.4" />
+    <property name="warmake" value="make" />
+
+    <property name="jboss" value="${jbossroot}/server/default"/>
+    <condition property="j2ee.lib"  value="${jbossroot}/common/lib" else="${jboss}/lib">
+        <isset property="jb5" />
+    </condition>
+    <condition property="jsf.lib"  value="${jboss}/deploy/jbossweb.sar/jsf-libs" else="${jboss}/deploy/jboss-web.deployer/jsf-libs">
+        <isset property="jb5" />
+    </condition>
+
+    <target name="clean">
+        <delete dir="build"/>
+        <delete dir="dist"/>
+        <ant antfile="acs-ejb/b.xml" inheritall="false" target="clean" />
+        <ant antfile="acs-war/b.xml" inheritall="false" target="clean" />
+    </target>
+    <target name="makeprot">
+        <property name="warmake" value="makeprot" />
+        <ant antfile="b.xml" inheritall="true" target="make">
+            <property name="warmake" value="makeprot" />
+            </ant>
+    </target>
+    <target name="make">
+        <property name="ear.dir" value="build/ear" />
+        <ant antfile="acs-war/b.xml" inheritall="false" target="${warmake}">
+            <property name="j2ee.lib" value="${j2ee.lib}" />
+            <property name="jsf.lib" value="${jsf.lib}" />
+            <property name="jb5" value="${jb5}" />
+        </ant>
+        <mkdir dir="build"/>
+        <mkdir dir="build/ear"/>
+        <mkdir dir="dist"/>
+        <copy todir="${ear.dir}/META-INF">
+            <fileset dir="src/conf"/>
+        </copy>
+        <copy file="acs-ejb/dist/acs-ejb.jar" todir="${ear.dir}" />
+        <copy file="acs-war/dist/acs-war.war" todir="${ear.dir}" />
+        <copy file="acs-ejb/lib/js.jar" todir="${ear.dir}" />
+
+        <jar compress="${jar.compress}" jarfile="dist/acs.ear">
+            <fileset dir="${ear.dir}"/>
+        </jar>
+    </target>
+    <target name="deploy" depends="make">
+        <copy file="dist/acs.ear" todir="${jboss}/deploy" />
+    </target>
+    <target name="bindist" depends="make">
+        <property name="bin.zip.dir" value="build/binzip/openacs" />
+        <delete dir="${bin.zip.dir}"/>
+        <mkdir dir="${bin.zip.dir}"/>
+        <mkdir dir="dist"/>
+        <copy todir="${bin.zip.dir}">
+            <fileset dir="doc" />
+        </copy>
+        <copy file="dist/acs.ear" todir="${bin.zip.dir}" />
+        <zip destfile="dist/openacs-bin-${openacs.version}.zip" basedir="${bin.zip.dir}\.." />
+    </target>
+    <target name="srcdist">
+        <property name="src.zip.dir" value="build/srczip/openacs" />
+        <delete dir="${src.zip.dir}"/>
+        <mkdir dir="dist"/>
+        <mkdir dir="${src.zip.dir}"/>
+        <copy todir="${src.zip.dir}">
+            <fileset dir=".">
+                <include name="*/web/**" />
+                <include name="**/src/**" />
+                <include name="**/test/**" />
+                <include name="**/setup/**" />
+                <include name="**/lib/**" />
+                <include name="**/b.*" />
+                <include name="build.properties" />
+                <exclude name="**/build/**" />
+                <exclude name="**/dist/**" />
+            </fileset>
+        </copy>
+        <move file="${src.zip.dir}/b.xml" tofile="${src.zip.dir}/build.xml"/>
+        <zip destfile="dist/openacs-src-${openacs.version}.zip" basedir="${src.zip.dir}\.." />
+    </target>
+</project>

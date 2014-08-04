@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Cpe info for #{Cpe.sn}</ui:define>
+        <ui:define name="body">
+
+            <a4j:form  id="cpedetails" >
+                <h:panelGrid class="dr-pnl-b rich-panel-body" columns="1">
+                    <h:panelGroup> <fieldset>
+
+                            <h:outputText value="Serial number: "/>
+                            <h:outputText value="#{Cpe.sn}" />
+                            <h:outputText value=" Hardware: "/>
+                            <h:outputText value="#{Cpe.hardware}" />
+                            <h:outputText value=" Current software: "/>
+                            <h:outputText value="#{Cpe.currversion}" />
+                            <h:outputText value=" Current config: "/>
+                            <h:outputText value="#{Cpe.cfgversion}" />
+                            <h:outputText value=" Last inform at: "/>
+                            <h:outputText value="#{Cpe.lastcontact}" />
+                            <br/>
+                            <h:outputText value="Customer ID: " />
+                            <h:outputText value="#{Cpe.customerId}"/>
+                        </fieldset></h:panelGroup>
+                    <h:panelGroup>
+                        <fieldset>
+                            <h:outputText value="Connection request URL: "/>
+
+                            <rich:progressBar id ="pb" value="#{Cpe.currentValue}"
+                                              interval="1000" label="#{Cpe.currentValue} %"
+                                              enabled="#{Cpe.inProgress}" minValue="-1" maxValue="100"
+                                              reRenderAfterComplete="cpedetails">
+                                <f:facet name="initial">
+                                    <h:commandLink action="#{Cpe.connectionRequest}"
+                                                   value="#{Cpe.url}" reRender="pb,cpedetails"
+                                                   rendered="#{!Cpe.inProgress}"
+                                                   />
+                                </f:facet>
+                                <f:facet name="complete">
+                                    <h:commandLink action="#{Cpe.connectionRequest}"
+                                                   value="#{Cpe.url}" reRender="pb,cpedetails"
+                                                   rendered="#{!Cpe.inProgress}"
+                                                   />
+                                </f:facet>
+                            </rich:progressBar>
+
+                            <h:outputText value="Last Conreq: "/>
+                            <h:outputText value="#{Cpe.reqRes}" />
+                            <br/><h:outputLink target="new" value="#{Cpe.webUIUrl}" title="CPE page">
+                                <h:outputText value="Go to CPE web UI" />
+                            </h:outputLink>
+                            <br/><h:commandButton value="Reboot" action="#{Cpe.requestReboot}" styleClass="rich-button"/>
+                            <h:outputText value="(this will mark CPE for reboot and try to request connection.)" />
+                        </fieldset>
+                    </h:panelGroup>
+                    <h:panelGroup> <fieldset><legend>Configuration</legend>
+                            <h:outputText value="Name: "/>
+                            <h:outputText  value="#{Cpe.configname}" />
+                            <h:outputText value=" current version: "/>
+                            <h:outputText value="#{Cpe.cfgversion}" />
+                            <h:outputText value=" update attempted at: "/>
+                            <h:outputText value="#{Cpe.cfgupdtime}" />
+                            <h:outputText value=" result: "/>
+                            <h:outputText value="#{Cpe.cfgupdres}" />
+                        </fieldset></h:panelGroup>
+                    <h:panelGroup> <fieldset><legend>Software</legend>
+                            <h:outputText value=" Current version: "/>
+                            <h:outputText value="#{Cpe.currversion}" />
+                            <h:outputText value=" Update attempted at: "/>
+                            <h:outputText value="#{Cpe.sfwupdtime}" />
+                            <h:outputText value=" result: "/>
+                            <h:outputText value="#{Cpe.sfwupdres}" />
+
+                        </fieldset></h:panelGroup>
+                    <h:panelGroup> <fieldset><legend>Line</legend>
+                            <h:outputText value="Modulation: "/>
+                            <h:outputText value="#{Cpe.modulationType}" />
+                            <h:outputText value=" Status: "/>
+                            <h:outputText value="#{Cpe.lineStatus}" />
+                        </fieldset></h:panelGroup>
+                    <h:panelGroup><fieldset><legend>Line parameters</legend>
+                            <h:panelGrid class="dr-pnl-b rich-panel-body" columns="3" rendered="false">
+                                <h:outputText value=" "/>
+                                <h:outputText value="Downstream" />
+                                <h:outputText value="Upstream"/>
+
+                                <h:outputText value="Attenuation: "/>
+                                <h:outputText value="#{Cpe.downstreamAttenuation}" />
+                                <h:outputText value="#{Cpe.upstreamAttenuation}" />
+
+                                <h:outputText value="Current rate: "/>
+                                <h:outputText value="#{Cpe.downstreamCurrRate}" />
+                                <h:outputText value="#{Cpe.upstreamCurrRate}" />
+
+                                <h:outputText value="Max rate: "/>
+                                <h:outputText value="#{Cpe.downstreamMaxRate}" />
+                                <h:outputText value="#{Cpe.upstreamMaxRate}" />
+
+                                <h:outputText value="Noise margin: "/>
+                                <h:outputText value="#{Cpe.downstreamNoiseMargin}" />
+                                <h:outputText value="#{Cpe.upstreamNoiseMargin}" />
+
+                                <h:outputText value="Power: "/>
+                                <h:outputText value="#{Cpe.downstreamPower}" />
+                                <h:outputText value="#{Cpe.upstreamPower}" />
+
+                            </h:panelGrid>
+                            <h:panelGrid class="dr-pnl-b rich-panel-body" style="text-align:right" columns="6" rendered="true">
+                                <h:outputText value=" "/>
+                                <h:outputText value="Current rate (Kbps)"/>
+                                <h:outputText value="Max rate (Kbps)"/>
+                                <h:outputText value="Attenuation (db)"/>
+                                <h:outputText value="Noise margin (db)"/>
+                                <h:outputText value="Power (dBmV)"/>
+
+                                <h:outputText value="Downstream: " />
+                                <h:outputText value="#{Cpe.downstreamCurrRate}"/>
+                                <h:outputText value="#{Cpe.downstreamMaxRate}"/>
+                                <h:outputText value="#{Cpe.downstreamAttenuation div 10}"/>
+                                <h:outputText value="#{Cpe.downstreamNoiseMargin div 10}"/>
+                                <h:outputText value="#{Cpe.downstreamPower div 10}"/>
+
+                                <h:outputText value="Upstream: "/>
+                                <h:outputText value="#{Cpe.upstreamCurrRate}"/>
+                                <h:outputText value="#{Cpe.upstreamMaxRate}"/>
+                                <h:outputText value="#{Cpe.upstreamAttenuation div 10}"/>
+                                <h:outputText value="#{Cpe.upstreamNoiseMargin div 10}"/>
+                                <h:outputText value="#{Cpe.upstreamPower div 10}"/>
+
+                            </h:panelGrid>
+                        </fieldset></h:panelGroup>
+                    <ui:include src="cpe_atmstats.xhtml">
+                        <ui:param name="atmerrorstats" value="#{Cpe.atmErrorStatsQuarterHour}"/>
+                        <ui:param name="atmerrorstatsname" value="QuarterHour"/>
+                    </ui:include>
+                    <ui:include src="cpe_atmstats.xhtml">
+                        <ui:param name="atmerrorstats" value="#{Cpe.atmErrorStatsLastShowTime}"/>
+                        <ui:param name="atmerrorstatsname" value="LastShowTime"/>
+                    </ui:include>
+                    <ui:include src="cpe_atmstats.xhtml">
+                        <ui:param name="atmerrorstats" value="#{Cpe.atmErrorStatsShowTime}"/>
+                        <ui:param name="atmerrorstatsname" value="ShowTime"/>
+                    </ui:include>
+                    <ui:include src="cpe_atmstats.xhtml">
+                        <ui:param name="atmerrorstats" value="#{Cpe.atmErrorStatsCurrentDay}"/>
+                        <ui:param name="atmerrorstatsname" value="CurrentDay"/>
+                    </ui:include>
+                    <ui:include src="cpe_atmstats.xhtml">
+                        <ui:param name="atmerrorstats" value="#{Cpe.atmErrorStatsTotal}"/>
+                        <ui:param name="atmerrorstatsname" value="Total"/>
+                    </ui:include>
+                </h:panelGrid>
+                <br/>
+
+            </a4j:form>
+            <h:form>
+                <h:commandButton class="rich-button" type="submit" value="Remove"
+                                 onclick="if (!confirm('Are you sure you want to remove it?')) { return false; }"
+                                 action="#{Cpe.Remove}"/>
+            </h:form>
+        </ui:define>
+        <ui:define name="lmenu"><ui:include src="cpe_menu.xhtml" /> </ui:define>
+
+    </ui:composition>
+</html>

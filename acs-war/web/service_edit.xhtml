@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Service management</ui:define>
+        <ui:define name="body">
+            <h4><h:outputText value="Service: #{Service.name}" /></h4>
+            <h:form>
+                <rich:tabPanel switchType="server" width="1000px">
+
+                    <rich:tab label="General">
+                        <h:inputHidden value="#{Service.name}"/>
+                        <ui:include src="/service_fields.xhtml" />
+                        <rich:spacer height="5" />
+                        <h:commandButton class="rich-button" type="submit" value="Save" action="#{Service.save}" />
+                        <h:commandButton class="rich-button" type="submit" value="Delete" action="#{Service.delete}"  onclick="if (!confirm('Are you sure?')) { return false; }"/>
+                        <br/>
+                    </rich:tab>
+
+                    <rich:tab label="Variables">
+                        <rich:spacer height="15" />
+                        <p>The variables and their values to check on cpe. The names are as defined in data model TRs, e.g. TR-098, TR-135.<br />
+                            For writable multiinstance objects also count of instances is checked and instances created/deleted<br />
+                            Special instance number 0 will delete all instances.<br />
+                            Wildcards '*' for instances names can be used.<br />
+                            Parameter name should contain exactly one instance number placeholder "{i}" which will be replaced by actual<br />
+                            instance number when assigning to cpe <br/>
+                        </p>
+                        <rich:spacer height="10" />
+                        <rich:dataTable id="varlist" value="#{Service.properties}" var="row">
+
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Name" />
+                                </f:facet>
+                                <h:panelGrid columns="2">
+                                    <h:commandLink
+                                        style="display:block;height:20px;border-bottom:0px;border-top:0px"
+                                        action="#{Service.RemoveProperty}"
+                                        reRender="varlist" onclick="if (!confirm('Are you sure you want to remove it?')) { return false; }">
+                                        <h:graphicImage
+                                            style="border-bottom:0px;border-top:0px;border-left:0px;border-right:0px"
+                                            value="/images/remove_icon.gif"
+                                            width="15" height="15" longdesc="Remove" />
+                                        <a4j:actionparam name="id" value="#{row.name}" assignTo="#{Service.propertyToRemove}"/>
+                                    </h:commandLink>
+                                    <h:outputText value="#{row.name}" />
+                                </h:panelGrid>
+                                <f:facet name="footer">
+                                    <h:inputText value="#{Service.propname}" size="120"/>
+                                </f:facet>
+
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Value" />
+                                </f:facet>
+                                <rich:inplaceInput  value="#{row.value}" defaultLabel="click to enter value"
+                                                    showControls="true" id="valueInplaceInput"
+                                                    controlsHorizontalPosition="left" controlsVerticalPosition="bottom">
+                                </rich:inplaceInput>
+                                <f:facet name="footer">
+                                    <h:panelGrid columns="3">
+                                        <h:inputText value="#{Service.propvalue}"/>
+                                    </h:panelGrid>
+                                </f:facet>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Parameter" />
+                                </f:facet>
+                                <h:selectBooleanCheckbox value="#{row.param}" />
+                                <f:facet name="footer">
+                                    <h:panelGrid columns="3">
+                                        <h:selectBooleanCheckbox value="#{Service.propparam}" />
+                                        <h:commandButton
+                                            value="Add"
+                                            action="#{Service.AddProperty}"
+                                            reRender="varlist" />
+                                    </h:panelGrid>
+                                </f:facet>
+                            </rich:column>
+                        </rich:dataTable>
+                        <br />
+                        <h:commandButton class="rich-button" type="submit" value="Save" action="#{Service.save}" />
+                    </rich:tab>
+                </rich:tabPanel>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="lmenu"><ui:include src="service_menu.xhtml" /> </ui:define>
+    </ui:composition>
+</html>

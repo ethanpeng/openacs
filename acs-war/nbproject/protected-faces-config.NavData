@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="old/test.xhtml" x="2150" y="150" zoom="true"/>
+        <Node id="cpe_cwmptree.xhtml" x="1900" y="600" zoom="true"/>
+        <Node id="t1.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="devices_new.xhtml" x="1650" y="150" zoom="true"/>
+        <Node id="old/modeltree.xhtml" x="400" y="1050" zoom="true"/>
+        <Node id="software_edit.xhtml" x="1900" y="150" zoom="true"/>
+        <Node id="cpe_overview.xhtml" x="1400" y="450" zoom="true"/>
+        <Node id="error.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="old/modeltree_1_2.xhtml" x="1150" y="750" zoom="true"/>
+        <Node id="cpe_stats_graph.xhtml" x="400" y="1350" zoom="true"/>
+        <Node id="config_new.xhtml" x="900" y="1050" zoom="true"/>
+        <Node id="scripts_ajax.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="devices.xhtml" x="2150" y="450" zoom="true"/>
+        <Node id="device_menu.xhtml" x="900" y="900" zoom="true"/>
+        <Node id="config_fields.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="deviceprofile_menu.xhtml" x="2650" y="150" zoom="true"/>
+        <Node id="mt.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="old/models.xhtml" x="150" y="1200" zoom="true"/>
+        <Node id="cpe_find.xhtml" x="900" y="750" zoom="true"/>
+        <Node id="old/index.xhtml" x="650" y="900" zoom="true"/>
+        <Node id="software_methods.xhtml" x="650" y="1200" zoom="true"/>
+        <Node id="cpe_1.xhtml" x="2150" y="300" zoom="true"/>
+        <Node id="t2.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="software.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="deviceprofile_new.xhtml" x="1400" y="600" zoom="true"/>
+        <Node id="software_fields.xhtml" x="2400" y="150" zoom="true"/>
+        <Node id="device_template.xhtml" x="150" y="1350" zoom="true"/>
+        <Node id="cpe.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="devices_menu.xhtml" x="1650" y="300" zoom="true"/>
+        <Node id="old/configs.xhtml" x="2400" y="300" zoom="true"/>
+        <Node id="old/hosts.xhtml" x="1400" y="750" zoom="true"/>
+        <Node id="index.jsp" x="150" y="450" zoom="true"/>
+        <Node id="scripts.xhtml" x="1150" y="450" zoom="true"/>
+        <Node id="cpe_config.xhtml" x="1150" y="600" zoom="true"/>
+        <Node id="cpestats.xhtml" x="1650" y="450" zoom="true"/>
+        <Node id="devices_fields.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="old/modeltree_1.xhtml" x="1650" y="600" zoom="true"/>
+        <Node id="deviceprofile_fields.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="r.xhtml" x="1150" y="900" zoom="true"/>
+        <Node id="software_paramnames.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="settings.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="old/software.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="config.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="cpe_atmstats.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="device.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="old/modeltree_1_2_1.xhtml" x="150" y="1500" zoom="true"/>
+        <Node id="h.xhtml" x="650" y="1050" zoom="true"/>
+        <Node id="config_edit.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="dynamic-css.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="cpe_foundmany.xhtml" x="400" y="1200" zoom="true"/>
+        <Node id="deviceprofile_edit.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="software_new.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="devices_edit.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="old/cpe.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="index.xhtml" x="150" y="1050" zoom="true"/>
+        <Node id="cpe_menu.xhtml" x="1900" y="450" zoom="true"/>
+        <Node id="old/scripts2.xhtml" x="1900" y="300" zoom="true"/>
+        <Node id="old/scripts.xhtml" x="650" y="750" zoom="true"/>
+        <Node id="old/modeltree_1_1.xhtml" x="400" y="300" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

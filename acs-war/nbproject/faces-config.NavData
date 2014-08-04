@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="service_fields.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="docs.xhtml" x="1650" y="750" zoom="true"/>
+        <Node id="cpe_cwmptree.xhtml" x="900" y="900" zoom="true"/>
+        <Node id="t1.xhtml" x="1114" y="368" zoom="true"/>
+        <Node id="devices_new.xhtml" x="1023" y="969" zoom="true"/>
+        <Node id="software_edit.xhtml" x="826" y="1287" zoom="true"/>
+        <Node id="tst.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="cpe_overview.xhtml" x="937" y="640" zoom="true"/>
+        <Node id="error.xhtml" x="900" y="1050" zoom="true"/>
+        <Node id="service_menu.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="tst1.xhtml" x="400" y="1350" zoom="true"/>
+        <Node id="cpe_cwmpvars.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="cpe_stats_graph.xhtml" x="1900" y="300" zoom="true"/>
+        <Node id="config_new.xhtml" x="1400" y="750" zoom="true"/>
+        <Node id="scripts_ajax.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="devices.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="config_fields.xhtml" x="650" y="900" zoom="true"/>
+        <Node id="device_menu.xhtml" x="1150" y="600" zoom="true"/>
+        <Node id="deviceprofile_menu.xhtml" x="1400" y="600" zoom="true"/>
+        <Node id="mt.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="cpe_find.xhtml" x="900" y="750" zoom="true"/>
+        <Node id="service_edit.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="software_methods.xhtml" x="400" y="1200" zoom="true"/>
+        <Node id="service_phoneline_fields.xhtml" x="1900" y="600" zoom="true"/>
+        <Node id="cpe_1.xhtml" x="1400" y="450" zoom="true"/>
+        <Node id="cpe_services.xhtml" x="1650" y="150" zoom="true"/>
+        <Node id="t2.xhtml" x="1166" y="500" zoom="true"/>
+        <Node id="software.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="deviceprofile_new.xhtml" x="2150" y="150" zoom="true"/>
+        <Node id="software_fields.xhtml" x="1650" y="600" zoom="true"/>
+        <Node id="device_template.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="cpe.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="devices_menu.xhtml" x="1900" y="450" zoom="true"/>
+        <Node id="index.jsp" x="1150" y="150" zoom="true"/>
+        <Node id="scripts.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="cpe_config.xhtml" x="926" y="884" zoom="true"/>
+        <Node id="tab.xhtml" x="1400" y="900" zoom="true"/>
+        <Node id="cpestats.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="devices_fields.xhtml" x="1450" y="1189" zoom="true"/>
+        <Node id="service_edit_voiceprofile.xhtml" x="150" y="1050" zoom="true"/>
+        <Node id="docs_menu.xhtml" x="2150" y="450" zoom="true"/>
+        <Node id="phoneline_fields.xhtml" x="2650" y="150" zoom="true"/>
+        <Node id="doc/javascript.html" x="650" y="1200" zoom="true"/>
+        <Node id="deviceprofile_fields.xhtml" x="2400" y="150" zoom="true"/>
+        <Node id="r.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="service_new.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="software_paramnames.xhtml" x="1150" y="900" zoom="true"/>
+        <Node id="cpe_cwmptree_1.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="settings.xhtml" x="150" y="1350" zoom="true"/>
+        <Node id="config.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="cpe_atmstats.xhtml" x="1650" y="450" zoom="true"/>
+        <Node id="device.xhtml" x="1650" y="300" zoom="true"/>
+        <Node id="h.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="dynamic-css.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="config_edit.xhtml" x="1150" y="750" zoom="true"/>
+        <Node id="service_voiceprofile_fields.xhtml" x="150" y="1500" zoom="true"/>
+        <Node id="cpe_foundmany.xhtml" x="636" y="807" zoom="true"/>
+        <Node id="deviceprofile_edit.xhtml" x="150" y="1200" zoom="true"/>
+        <Node id="software_new.xhtml" x="650" y="1050" zoom="true"/>
+        <Node id="devices_edit.xhtml" x="2150" y="300" zoom="true"/>
+        <Node id="index.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="software_paramnames_1.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="cpe_menu.xhtml" x="400" y="1050" zoom="true"/>
+        <Node id="software_methods_1.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="service_edit_phoneline.xhtml" x="1900" y="150" zoom="true"/>
+        <Node id="service_generic_fields.xhtml" x="2400" y="300" zoom="true"/>
+        <Node id="testDataModel.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="cwmpnamesuggest.xhtml" x="650" y="750" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

@@ -1,0 +1,24 @@
+
+body {
+    font: x-small sans-serif;
+}
+
+pre {
+    font-size: 8pt;
+	padding: 1em;
+	border: 1px dashed #2f6fab;
+	color: black;
+	background-color: #f9f9f9;
+	line-height: 1.1em;
+    background: white;
+    white-space: pre;
+    overflow: auto;
+}
+
+p {
+    font-size: 127%;
+    font: x-small sans-serif;
+    color: black;
+    line-height: 1.5em;
+    margin: 0.4em 0px 0.5em
+}

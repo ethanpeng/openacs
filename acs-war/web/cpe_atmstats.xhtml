@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition>
+        <h:panelGroup rendered="#{atmerrorstats['IntervalStart']!=null}">
+            <fieldset>
+                <legend>ATM counts '#{atmerrorstatsname}' started #{atmerrorstats['IntervalStart']}</legend>
+                <h:panelGrid columns="4">
+
+                    <h:panelGroup rendered="#{atmerrorstats['ATUCCRCErrors']!=null}">
+                        <h:outputText value=" ATUCCRCErrors: "/>
+                        <h:outputText value="#{atmerrorstats['ATUCCRCErrors']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['ATUCFECErrors']!=null}">
+                        <h:outputText value=" ATUCFECErrors: "/>
+                        <h:outputText value="#{atmerrorstats['ATUCFECErrors']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['ATUCHECErrors']!=null}">
+                        <h:outputText value=" ATUCHECErrors: "/>
+                        <h:outputText value="#{atmerrorstats['ATUCHECErrors']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['CellDelin']!=null}">
+                        <h:outputText value=" CellDelin: "/>
+                        <h:outputText value="#{atmerrorstats['CellDelin']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['CRCErrors']!=null}">
+                        <h:outputText value=" CRCErrors: "/>
+                        <h:outputText value="#{atmerrorstats['CRCErrors']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['ErroredSecs']!=null}">
+                        <h:outputText value=" ErroredSecs: "/>
+                        <h:outputText value="#{atmerrorstats['ErroredSecs']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['FECErrors']!=null}">
+                        <h:outputText value=" FECErrors: "/>
+                        <h:outputText value="#{atmerrorstats['FECErrors']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['HECErrors']!=null}">
+                        <h:outputText value=" HECErrors: "/>
+                        <h:outputText value="#{atmerrorstats['HECErrors']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['InitErrors']!=null}">
+                        <h:outputText value=" InitErrors: "/>
+                        <h:outputText value="#{atmerrorstats['InitErrors']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['InitTimeouts']!=null}">
+                        <h:outputText value=" InitTimeouts: "/>
+                        <h:outputText value="#{atmerrorstats['InitTimeouts']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['LinkRetrain']!=null}">
+                        <h:outputText value=" LinkRetrain: "/>
+                        <h:outputText value="#{atmerrorstats['LinkRetrain']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['LossOfFraming']!=null}">
+                        <h:outputText value=" LossOfFraming: "/>
+                        <h:outputText value="#{atmerrorstats['LossOfFraming']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['ReceiveBlocks']!=null}">
+                        <h:outputText value=" ReceiveBlocks: "/>
+                        <h:outputText value="#{atmerrorstats['ReceiveBlocks']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['SeverelyErroredSecs']!=null}">
+                        <h:outputText value=" SeverelyErroredSecs: "/>
+                        <h:outputText value="#{atmerrorstats['SeverelyErroredSecs']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['TransmitBlocks']!=null}">
+                        <h:outputText value=" TransmitBlocks: "/>
+                        <h:outputText value="#{atmerrorstats['TransmitBlocks']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['LossOfPower']!=null}">
+                        <h:outputText value=" LossOfPower: "/>
+                        <h:outputText value="#{atmerrorstats['LossOfPower']}" />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{atmerrorstats['LossOfSignal']!=null}">
+                        <h:outputText value=" LossOfSignal: "/>
+                        <h:outputText value="#{atmerrorstats['LossOfSignal']}" />
+                    </h:panelGroup>
+                </h:panelGrid>
+            </fieldset></h:panelGroup>
+
+    </ui:composition>
+</html>

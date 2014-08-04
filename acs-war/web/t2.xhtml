@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:ui="http://java.sun.com/jsf/facelets"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    xmlns:a4j="http://richfaces.org/a4j"
+                    xmlns:rich="http://richfaces.org/rich">
+        <h:form>
+            <rich:dataTable value="#{DeviceProfile.vars}" var="v"
+                            width="350px" columnClasses=",columns,columns,columns" rows="15"
+                            id="table" rowKeyVar="row">
+                <rich:column>
+                    <f:facet name="header">
+                        <h:outputText value="Row"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{row+1}"></h:outputText>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">
+                        <h:outputText value="Price" />
+                    </f:facet>
+                    <rich:inplaceInput layout="block" value="#{v.name}"
+                                       id="inplace" required="true"
+                                       requiredMessage="Price at row #{row+1} wasn't filled. Value can't be changed."
+                                       changedHoverClass="hover" viewHoverClass="hover"
+                                       viewClass="inplace" changedClass="inplace"
+                                       selectOnEdit="true" editEvent="ondblclick">
+
+                        <f:facet name="controls">
+                            <button onclick="#{rich:component('inplaceInput')}.save();"
+                                    type="button"> 
+                                Save</button>
+                            <button onclick="#{rich:component('inplaceInput')}.cancel();"
+                                    type="button">Cancel</button>
+                        </f:facet>
+
+                    </rich:inplaceInput>
+                </rich:column>
+                <f:facet name="footer">
+                    <rich:datascroller ajaxSingle="false"/>
+                </f:facet>
+            </rich:dataTable>
+            <h:commandButton class="rich-button" type="submit" value="Save" action="#{DeviceProfile.vyksmas}" />
+        </h:form>
+    </ui:composition>
+</html>

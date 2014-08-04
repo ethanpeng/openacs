@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="make" name="acs-war-impl">
+    <target name="clean">
+        <delete dir="build"/>
+        <delete dir="dist"/>
+    </target>
+    <target name="make">
+        <property name="wscompile.lib" value="lib/wscompile.jar" />
+        <mkdir dir="build"/>
+        <mkdir dir="build/jar"/>
+        <copy todir="build/jar/META-INF">
+            <fileset dir="src/conf"/>
+        </copy>
+        <mkdir dir="build/jar/META-INF/wsdl"/>
+        <manifest file="build/jar/META-INF/MANIFEST.MF" mode="update">
+            <attribute name="Class-Path" value="js.jar"/>
+        </manifest>
+
+        <taskdef classname="com.sun.xml.rpc.tools.ant.Wscompile" name="wscompile">
+            <classpath path="${wscompile.lib}"/>
+        </taskdef>
+        
+        <javac destdir="build/jar" fork="yes" includeantruntime="false" srcdir="src/java" target="1.5"  debug="on">
+            <classpath>
+                <fileset dir="${j2ee.lib}">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <fileset dir="lib">
+                    <include name="**/*.jar"/>
+                </fileset>
+                <path path="@{classpath}"/>
+            </classpath>
+            <compilerarg line="-Xlint:unchecked"/>
+        </javac>
+        <mkdir dir="build/wsbinary"/>
+        <mkdir dir="build/wsservice"/>
+        <wscompile base="build/wsbinary" config="src\java\org\openacs\ws\OpenACS-config.xml" define="true" features="strict, rpcliteral" fork="true" keep="true" mapping="build/jar/META-INF/OpenACS-mapping.xml" nonClassDir="build/jar/META-INF/wsdl" sourceBase="build/wsservice" verbose="true" xPrintStackTrace="true" >
+            <classpath>
+                <pathelement location="${wscompile.lib}" />
+                <pathelement location="${j2ee.lib}/jboss-jaxrpc.jar" />
+                <pathelement location="${j2ee.lib}/jbossws-native-jaxrpc.jar" />
+                <fileset dir="${j2ee.lib}">
+                    <include name="**/*.jaar"/>
+                </fileset>
+                <path path="@{classpath}"/>
+                <path path="build/jar" />
+            </classpath>
+        </wscompile>
+        <mkdir dir="dist"/>
+        <jar compress="${jar.compress}" jarfile="dist/acs-ejb.jar" manifest="build/jar/META-INF/MANIFEST.MF" >
+            <fileset dir="build/jar"/>
+        </jar>
+        
+    </target>
+    
+</project>

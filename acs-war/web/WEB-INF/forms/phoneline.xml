@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1257"?>
+<form name="phoneline">
+    <tab name="Line">
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.Enable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.AnonymousCalEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.AnonymousCallBlockEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallForwardOnBusyEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallForwardOnBusyNumber" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallForwardOnNoAnswerEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallForwardOnNoAnswerNumber" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallForwardOnNoAnswerRingCount" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallForwardUnconditionalEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallForwardUnconditionalNumber" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallReturnEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallTransferEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallWaitingEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallerIDEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallerIDName" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.CallerIDNameEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.DoNotDisturbEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.MWIEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.MaxSessions" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.CallingFeatures.RepeatDialEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.DirectoryNumber" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.H323.H323ID" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.MGCP.LineName" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.PhyReferenceList" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.SIP.AuthPassword" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.SIP.AuthUserName" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.SIP.URI" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.Stats.ResetStatistics" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.VoiceProcessing.EchoCancellationEnable" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.VoiceProcessing.ReceiveGain" />
+        <param varname=".Services.VoiceService.1.VoiceProfile.{i}.Line.{i}.VoiceProcessing.TransmitGain" />
+    </tab>
+</form>

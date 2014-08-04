@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Values for #{Cpe.sn}</ui:define>
+        <ui:define name="body">
+            <h:form id="modelbrowser" rendered="#{Cpe.lastBackup!=null}">
+                <h:panelGrid columns="1" id="pathlinks" >
+                    <ui:repeat var="pe" value="#{Cpe.pathArray}" >
+                        <h:commandLink value="#{pe}." reRender="mvaluelist,pathlinks" submitMode="server">
+                            <a4j:actionparam name="path" value="#{pe.fromRoot}" assignTo="#{Cpe.path}"/>
+                        </h:commandLink>
+                    </ui:repeat >
+                </h:panelGrid>
+                <rich:dataTable id="mvaluelist" rows="#{Cpe.rowCount}" value="#{Cpe.cols}" var="col">
+
+                    <rich:columns index="ind" value="#{Cpe.headers}" var="hdr">
+                        <f:facet name="header">
+                            <h:graphicImage id="hdrfct#{ind}" value="/images/info_icon.gif" width="15" height="15" rendered="#{not Cpe.multiInstance}">
+                                <rich:toolTip showEvent="onclick" mode="ajax" id="hdrfcttt#{ind}" layout="block">
+                                    <f:facet name="defaultContent">
+                                        <strong>Wait...</strong>
+                                    </f:facet>
+                                    This is a tooltip.#{DataModel.map[col[ind]]}
+                                </rich:toolTip>
+                            </h:graphicImage>
+                            <h:outputText value="#{hdr}" id="fcttxt#{ind}" />
+                        </f:facet>
+                        <h:panelGrid columns="2"  rendered="#{ind==0}">
+                            <h:graphicImage id="txt2a#{ind}" value="/images/info_icon.gif" width="15" height="15" rendered="#{not Cpe.multiInstance}">
+                                <rich:toolTip showEvent="onclick" mode="ajax" id="tt2a#{ind}" layout="block" hideEvent="onclick">
+                                    <f:facet name="defaultContent">
+                                        <strong>Wait...</strong>
+                                    </f:facet>
+                                    <h:outputText value="#{DataModel[col[ind]].name}"  style="font-weight:bold" />
+                                    <hr style="color:#ff7700" />
+                                    <h:panelGrid columns="2" columnClasses="bold">
+                                        <h:outputText value="Type:" style="font-weight:bold" /><h:outputText value="#{DataModel[col[ind]].type}" style="font-weight:normal" />
+                                        <h:outputText value="Writable:" style="font-weight:bold" /><h:outputText value="#{DataModel[col[ind]].writable}" style="font-weight:normal"/>
+                                        <h:outputText value="Length:" style="font-weight:bold"  /><h:outputText value="#{DataModel[col[ind]].length}" style="font-weight:normal"/>
+                                        <h:outputText value="Min:" style="font-weight:bold"  /><h:outputText value="#{DataModel[col[ind]].min}" style="font-weight:normal"/>
+                                        <h:outputText value="Max:" style="font-weight:bold"  /><h:outputText value="#{DataModel[col[ind]].max}" style="font-weight:normal"/>
+                                        <h:outputText value="Default value:" style="font-weight:bold"  /><h:outputText value="#{DataModel[col[ind]].defaultvalue}" style="font-weight:normal"/>
+                                        <h:outputText value="Description:" style="font-weight:bold" /><h:outputText value="#{DataModel[col[ind]].description}" style="font-weight:normal"/>
+                                        <h:outputText value="Defined by:" style="font-weight:bold" /><h:outputText value="#{DataModel[col[ind]].trname}" style="font-weight:normal"/>
+                                    </h:panelGrid>
+
+                                </rich:toolTip>
+                            </h:graphicImage>
+                            <h:commandLink value="#{(col[ind].class.name == 'org.openacs.DataModelNode') ? col[ind].name : col[ind] }"
+                                           id="linkas#{ind}"
+                                           rendered="#{ind==0}"
+                                           disabled="#{(col[ind].class.name == 'org.openacs.DataModelNode') and (col[ind].leaf)}"
+                                           reRender="mvaluelist,pathlinks" >
+                                <a4j:actionparam name="path"
+                                                 value="#{Cpe.path}.#{ (col[ind].class.name == 'org.openacs.DataModelNode') ? col[ind].name : col[ind]}"
+                                                 assignTo="#{Cpe.path}" />
+
+                            </h:commandLink>
+                        </h:panelGrid>
+                        <h:outputText id="txt#{ind}" value="#{col[ind]}" rendered="#{(col[ind].class.name == 'java.lang.String')}" >
+                            <rich:toolTip showEvent="onclick" mode="ajax" id="tt#{ind}" layout="block">This is a tooltip.#{DataModel.map[col[ind]]}</rich:toolTip>
+                        </h:outputText>
+
+
+                    </rich:columns>
+
+                </rich:dataTable>
+                <br />
+                <h:outputText value="Saved at: #{Cpe.lastBackup}" />
+
+            </h:form>
+
+        </ui:define>
+        <ui:define name="lmenu"><ui:include src="cpe_menu.xhtml" /> </ui:define>
+    </ui:composition>
+</html>

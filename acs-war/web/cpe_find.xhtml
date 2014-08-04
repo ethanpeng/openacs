@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--
+    
+    Copyright 2007-2012 Audrius Valunas
+
+    This file is part of OpenACS.
+
+    OpenACS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    OpenACS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with OpenACS.  If not, see <http://www.gnu.org/licenses/>.
+
+    -->
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Find CPE</ui:define>
+        <ui:define name="body">
+            <a4j:form>
+                <h:panelGrid columns="7">
+                    <h:outputText value="Hardware:" />
+                    <h:selectOneMenu submitMethod="ajax" value="#{Cpe.hwid}">
+                        <f:selectItems   value="#{Cpe.hardwareList}" />
+                        <a4j:support event="onchange" />
+                    </h:selectOneMenu>
+                    <h:outputText value="Serial No:" />
+                    <h:inputText value="#{Cpe.snIn}" id="cpeSerialNo"/>
+                    <h:commandButton class="rich-button" style="margin-top: 0;margin-bottom: 0"
+                                     value="Details" action="#{Cpe.findItem}" reRender="cpelist,cpedetails"/>
+                    <h:commandButton class="rich-button" style="margin-top: 0;margin-bottom: 0"
+                                     type="submit" value="New" action="#{Cpe.newItem}" reRender="cpedetails,cpelist"  />
+                </h:panelGrid>
+                <h:outputText value="Customer ID:" />
+                <h:inputText value="#{Cpe.customerid_in}"/>
+
+                <rich:suggestionbox for="cpeSerialNo"
+                                    rules="taisykle" first="0" minChars="1" border="1" width="100" height="100"
+                                    shadowDepth="#5" suggestionAction="#{Cpe.autocompleteSerialNo}" var="result">
+                    <h:column>
+                        <h:outputText value="#{result}" />
+                    </h:column>
+                </rich:suggestionbox>
+            </a4j:form >
+        </ui:define>
+    </ui:composition>
+</html>

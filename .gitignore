@@ -1,0 +1,7 @@
+.ant-targets-b.xml
+acs-ejb/build/
+acs-ejb/dist/
+acs-war/build/
+acs-war/dist/
+build/
+dist/

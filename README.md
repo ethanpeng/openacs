@@ -20,3 +20,8 @@ Automatic configuration server (ACS) implementing CPE configuration protocol CWM
 - Java application server JBoss
 - Apache Ant
 - MySQL
+
+## Install ACS Environment
+
+see the [install/README.md](install/README.md)
+

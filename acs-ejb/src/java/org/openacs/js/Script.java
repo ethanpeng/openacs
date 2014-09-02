@@ -54,6 +54,21 @@ public class Script extends Thread {
         this.cpe = cpe;
         this.sessionid = sessionid;
     }
+
+    private static String logtext = "";
+
+    public static String getLogtext() {
+        return logtext;
+    }
+
+    public static void setLogtext(String str) {
+        logtext = str;
+    }
+
+    public static void addLogtext(String str) {
+        logtext += str + "\n";
+    }
+
     private Logger logger = Logger.getLogger(Script.class.getName());
 
     private void log(Level level, String msg) {
@@ -87,10 +102,12 @@ public class Script extends Thread {
             case 1:
                 level = Level.INFO;
                 msg = args[0].toString();
+                addLogtext(args[0].toString());
                 break;
             case 2:
                 level = getLevel((String) args[0]);
                 msg = args[1].toString();
+                addLogtext(args[1].toString());
                 break;
             default:
                 level = getLevel((String) args[0]);

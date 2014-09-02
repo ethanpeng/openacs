@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="mt.xhtml">
+        <ui:define name="title">Log</ui:define>
+        <ui:define name="body">
+            <a4j:form>
+                <h:panelGrid columns="1">
+                    <h:outputText value="Log:" />
+                    <h:inputTextarea  rows="30" cols="100" value="#{Script.logtext}" />
+                </h:panelGrid>
+
+                <h:commandButton class="rich-button" value="Clear" action="#{Script.Clear}" />
+            </a4j:form>
+        </ui:define>
+    </ui:composition>
+</html>

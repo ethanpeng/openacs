@@ -113,6 +113,20 @@ public class ScriptJsfBean extends JsfBeanBase {
         this.text = text;
     }
 
+    protected String logtext = "";
+
+    public String getLogtext() {
+        return Script.getLogtext();
+    }
+
+    public void setLogtext(String str) {
+        Script.setLogtext(str);
+    }
+
+    public void Clear() {
+        setLogtext("");
+    }
+
     public boolean isNew() {
         return name == null || name.equals("");
     }

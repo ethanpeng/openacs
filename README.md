@@ -23,5 +23,7 @@ Automatic configuration server (ACS) implementing CPE configuration protocol CWM
 
 ## Install ACS Environment
 
-see the [install/README.md](install/README.md)
+    cd install && ./install.sh
+
+[see the install/README.md for more detai.](install/README.md)
 

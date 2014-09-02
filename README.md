@@ -25,5 +25,5 @@ Automatic configuration server (ACS) implementing CPE configuration protocol CWM
 
     cd install && ./install.sh
 
-[see the install/README.md for more detai.](install/README.md)
+[see the install/README.md for more detail.](install/README.md)
 

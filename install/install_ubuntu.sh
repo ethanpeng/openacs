@@ -23,6 +23,9 @@ if [ ! -f "/opt/jboss/bin/run.jar" ]; then
     if ! command -v wget > /dev/null; then
         sudo apt-get install -y wget
     fi
+    if ! command -v unzip > /dev/null; then
+        sudo apt-get install -y unzip
+    fi
     wget http://sourceforge.net/projects/jboss/files/JBoss/JBoss-4.2.3.GA/jboss-4.2.3.GA-jdk6.zip -O tmp.zip
     unzip tmp.zip > /dev/null
     sudo mkdir -p /opt/jboss
